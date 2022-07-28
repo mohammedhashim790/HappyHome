@@ -1,1 +1,25 @@
-<p>sign-in works!</p>
+ <div class="Home">
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+                    <button type="button" class="toggle-btn" onclick="login()">Login</button>
+                    
+        </div>
+        <form id="login" class="input-group">
+                    <input type="text" class="input-field" placeholder="UserId" required>
+                    <input type="text" class="input-field" placeholder="Enter Password" required>
+                    <input type="checkbox" class="check-box"><span>Remember Password</span>
+                    <button type="submit" class="submit-btn">Log in</button>
+        </form>
+    </div>
+</div>
+<script>
+    var x=document.getElementById("login");
+    var z=document.getElementById("btn");
+    function login(){
+        x.style.left="50 px";
+        y.style.left="450 px";
+        z.style.left="0 px";
+    }
+</script>
+
