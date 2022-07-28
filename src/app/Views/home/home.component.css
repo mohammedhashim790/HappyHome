@@ -1,0 +1,168 @@
+.canister{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.canister div{
+  width: 90%;
+  /*height: 200px;*/
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.advertisement-runner-container{
+  width: 70%;
+  margin: auto;
+  display: flex;
+}
+
+.advertisement-runner-container span{
+  width: 80%;
+  display: flex;
+  margin: auto;
+  height: 220px;
+}
+
+.advertisement-runner-container span img{
+  width: 80%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.loan-tracker-container{
+  width: 40%;
+  height: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  place-items: center;
+  border-left: 1px solid slategrey;
+}
+.info-runner{
+  width: 100%;
+  height: auto;
+  padding: 0.5rem;
+  color: #005C6D;
+  background-color: #FFF700;
+  justify-content: center;
+  display: flex;
+}
+
+.nav-bar{
+  width: 99%;
+  padding: 1.0rem;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+}
+.nav-bar ion-icon{
+  font-size: 20px;
+}
+.nav-bar a{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  place-items: center;
+  gap: 5px;
+}
+
+.menu-container{
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: auto;
+  padding: 1.0rem 0;
+}
+
+.menu-container .menu{
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+}
+
+.menu-container .menu .title{
+  color: slategrey;
+  font-size: 24px;
+}
+.menu-container .menu .menu-tab{
+  border: 1px solid slategrey;
+  display: flex;
+  flex-direction: column;
+}
+.menu-container .menu .menu-tab .link-container{
+  width: 100%;
+  display: flex;
+  font-size: 1.0rem;
+  padding: 1.0rem 0;
+  flex-direction: column;
+  color: slategrey;
+  justify-content: space-around;
+}
+
+.menu-container .menu .menu-tab .link-container button{
+  width: 100%;
+}
+
+
+.menu-container .menu .menu-tab .link-container a{
+  width: 98%;
+  margin: auto;
+  padding: 0.5rem 0;
+  display: grid;
+}
+.menu-container .menu .menu-tab .link-container a:after{
+  content: '';
+  width: 100%;
+  margin: auto;
+  height: 0;
+  border: 1px solid slategrey;
+  margin-top: 0.2rem;
+}
+
+.menu-container .menu .menu-tab .link-container a span{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+.menu-container .menu .menu-tab .link-container a span p{
+  width: 70%;
+}
+.menu-container .menu .menu-tab .link-container a span span{
+  width: 30%;
+}
+.menu-container .menu .menu-tab .companion-tab{
+  padding: unset !important;
+}
+
+.companion-tab button{
+  width: 100%;
+  padding-left: 1.0rem;
+  height: auto;
+  /*padding: 0.5rem 0;*/
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+}
+.companion-tab button h3{
+  color: white;
+}
+.companion-tab button img,ion-icon{
+  height: 75px;
+  object-position: center;
+  object-fit: contain;
+}
+

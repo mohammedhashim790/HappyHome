@@ -1,3 +1,69 @@
 *{
   margin: 0;
+  font-family: "Segoe UI";
+}
+
+body{
+  overflow-x: hidden;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+ion-icon{
+  font-size: 20px;
+}
+
+.primary-color{
+  color: #005C6D;
+}
+.primary-background-color{
+  background-color: #005C6D !important;
+  color: white;
+}
+
+.primary-button{
+  padding: 0.5rem 1.0rem;
+  background-color: #005C6D;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+.app-input{
+  width: 90%;
+  user-select: none;
+  padding: 2px;
+  border: none;
+  border-bottom: 1px slategrey solid;
+  outline: none;
+}
+
+.empty-button{
+  background: none;
+  border: none;
+}
+.horizontal-align-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.right-align{
+  margin-left: auto;
+  margin-right: 2%;
+  left: 100%;
+  right: 0;
+}
+
+.vertical-line{
+  width: 0;
+  height: 100%;
+  border: 1px solid slategrey;
+  display: flex;
+}
+.horizontal-line{
+  width: 98%;
+  margin: auto;
+  height: 0;
+  border: 1px solid slategrey;
+  display: flex;
 }
