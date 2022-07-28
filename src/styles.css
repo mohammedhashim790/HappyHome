@@ -29,6 +29,10 @@ ion-icon{
   border-radius: 10px;
   border: none;
 }
+.disabled-option{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 .app-input{
   width: 90%;
   user-select: none;
@@ -66,4 +70,7 @@ ion-icon{
   height: 0;
   border: 1px solid slategrey;
   display: flex;
+}
+.error{
+  color: darkred;
 }
