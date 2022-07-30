@@ -4,22 +4,18 @@
             <div id="btn"></div>
                     <button type="button" class="toggle-btn" onclick="Signup()">Signup</button>
         </div>
-        <form id="Signup" class="input-group">
-            <input type="text" class="input-field" placeholder="Enter Full name" required>
-            <input type="text" class="input-field" placeholder="Enter Email id" required>
-            <input type="text" class="input-field" placeholder="Create Password" required>
-            <input type="text" class="input-field" placeholder="Reenter Password" required>
+        <form id="Signup" class="input-group" FormGroup="details">
+            <input type="text" class="input-field" placeholder="Enter Full name" FormControlName="fullname" required>
+            <small class="error" *ngIf="details.get('fullname')?.errors && details.get('fullname')?.touched
+                        ||details.get('fullname')?.dirty">Field is invalid</small>
+            <input type="text" class="input-field" placeholder="Enter Email id" FormControlName="Emailid" required>
+            <small class="error" *ngIf="details.get('Emailid')?.errors && details.get('Emailid')?.touched
+                        ||details.get('Emailid')?.dirty">Field is invalid</small>
+      <input type="text" class="input-field" placeholder="Create Password" FormControlName="password"required>
+            <input type="text" class="input-field" placeholder="Reenter Password" FormControlName="reenterpassword" required>
             <input type="checkbox" class="check-box"><span>I agree to the terms and conditions</span>
-            <button type="submit" class="submit-btn">Register</button>
+            <button type="submit" class="submit-btn" (click)="OnSignUp()">Register</button>
         </form>
     </div>
 </div>
-<script>
-    var x=document.getElementById("Signup");
-    var z=document.getElementById("btn");
-    function Signup(){
-        x.style.left="-250 px";
-        y.style.left="50 px";
-        z.style.left="110 px";
-    }
-</script>
+

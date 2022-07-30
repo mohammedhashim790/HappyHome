@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-sign-in',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+  details:FormGroup;
 
-  constructor() { }
+  constructor(private router:Router) { 
+    this.details=new FormBuilder().group({
+      'username':new FormControl('',[Validators.required]),
+      'password':new FormControl('',[Validators.required])
+    }
+      );
+  }
 
   ngOnInit(): void {
+  }
+  OnLogIn(){
+    console.log("logging in")
+    console.log(this.details.value);
+    this.details.get("username")?.errors
   }
 
 }

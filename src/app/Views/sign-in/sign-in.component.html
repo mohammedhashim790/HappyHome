@@ -5,11 +5,14 @@
                     <button type="button" class="toggle-btn" onclick="login()">Login</button>
                     
         </div>
-        <form id="login" class="input-group">
-                    <input type="text" class="input-field" placeholder="UserId" required>
-                    <input type="text" class="input-field" placeholder="Enter Password" required>
+        <form id="login" class="input-group" [formGroup]="details">
+                    <input type="text" class="input-field" placeholder="UserId" formControlName="username" required>
+                    <small class="error" *ngIf="details.get('username')?.errors?.['required'] && details.get('username')?.touched
+                        ||details.get('username')?.dirty">Field is invalid</small>
+                    <input type="text" class="input-field" placeholder="Enter Password" formControlName="password" required>
                     <input type="checkbox" class="check-box"><span>Remember Password</span>
-                    <button type="submit" class="submit-btn">Log in</button>
+                    <button type="submit" class="submit-btn" (click)="OnLogIn()"
+                                    [disabled]="this.details.invalid">Log in</button>
         </form>
     </div>
 </div>
