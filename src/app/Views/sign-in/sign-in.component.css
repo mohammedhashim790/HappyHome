@@ -1,20 +1,50 @@
-.hero{
-    height:100%;
-    width:100%;
-    background-color:white;
+.canister{
+  width:100%;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  min-height: 80vh;
+  height: 100vh;
+  background-color:white;
 }
 .form-box{
-    display: flex;
-flex-direction: column;
-justify-content: center;
-place-items: center;
-    width:100%;
-    height:480px;
-    position:relative;
-    margin:6% auto;
-    background-color:white;
-    padding:5px;
-    overflow:hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+  width:30%;
+  height:auto;
+  position:relative;
+  background-color:white;
+  padding:2rem 1.0rem ;
+  box-shadow: 0px 0px 5px slategrey;
+}
+.form-box .title{
+  width: 100%;
+  height: auto;
+  margin: 5% auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+.form-box .title > * {
+  opacity: 0.5;
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+  /*place-items: center;*/
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+}
+.form-box .title > *:after{
+  content: '';
+  width: 100%;
+  height: 0;
+  margin-top: 2%;
+  border: 1px solid black;
+}
+.form-box .title .active{
+  opacity: 1.0 !important;
 }
 .button-box{
     width:220px;
@@ -43,10 +73,13 @@ place-items: center;
     transition:.5s;
 }
 .input-group{
-    top:180px;
-    position:absolute;
-    width:280px;
-    transition:.5s;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center;
+  gap: 25px;
+  width: 80%;
+  transition:.5s;
 }
 .input-field{
     width:100%;
@@ -72,13 +105,26 @@ place-items: center;
 .check-box{
     margin:30px 10px 30px 0;
 }
-span{
-    color:orange;
-    font-size:15px;
-}
 #login{
     left:50px;
 }
 #Signup{
     left:400px;
+}
+
+.app-input{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.app-input input{
+  width: 80%;
+  border: none;
+  user-select: none;
+  outline: none;
+}
+.app-input ion-icon{
+  width: 20%;
+  font-size: 24px;
+  color: black;
 }

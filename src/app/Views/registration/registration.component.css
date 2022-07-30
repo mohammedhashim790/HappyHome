@@ -39,6 +39,7 @@
   justify-content: center;
   /*place-items: center;*/
   min-height: 60vh;
+  margin: auto;
 }
 .canister .content-container .content{
   width: 100%;

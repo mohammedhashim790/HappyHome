@@ -9,8 +9,9 @@ import {Router} from "@angular/router"
 })
 export class SignInComponent implements OnInit {
   details:FormGroup;
+  passwordHidden: boolean = true;
 
-  constructor(private router:Router) { 
+  constructor(private router:Router) {
     this.details=new FormBuilder().group({
       'username':new FormControl('',[Validators.required]),
       'password':new FormControl('',[Validators.required])
@@ -23,7 +24,9 @@ export class SignInComponent implements OnInit {
   OnLogIn(){
     console.log("logging in")
     console.log(this.details.value);
-    this.details.get("username")?.errors
   }
 
+  navigateTo(path: string) {
+    this.router.navigateByUrl(path);
+  }
 }

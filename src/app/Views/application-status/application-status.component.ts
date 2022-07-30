@@ -16,7 +16,7 @@ export enum ApplicationStatus{
 })
 export class ApplicationStatusComponent implements OnInit {
 
-  applicationStatus = ApplicationStatus.APPLIED;
+  applicationStatus = ApplicationStatus.REJECTED;
 
   ApplicationStatus = ApplicationStatus;
 

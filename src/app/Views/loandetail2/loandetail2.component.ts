@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {GenApplicationID} from "../../Bloc/Bloc";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-loandetail2',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Loandetail2Component implements OnInit {
 
-  constructor() { }
+  @Input() applicationDetails:FormGroup | undefined;
 
-  ngOnInit(): void {
+  constructor(private router:Router) {
   }
 
+  ngOnInit(): void {
+
+  }
+
+  navigateTo(path: string) {
+    this.router.navigateByUrl(path);
+  }
 }

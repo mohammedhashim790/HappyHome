@@ -1,104 +1,5 @@
-
-<!--<h2 class="right-align" (click)="MoveTo(applicationState.PERSONAL)">-->
-<!--  <ion-icon name="create"></ion-icon>-->
-<!--</h2>-->
-
-<!--<div *ngSwitchCase="applicationState.PERSONAL" class="content" >-->
-<!--        <span class="app-input">-->
-<!--          <h2>Personal Details</h2>-->
-<!--        </span>-->
-<!--  <form class="input-fields" formGroupName="personal">-->
-<!--          <span>-->
-<!--            <h3>First Name</h3>-->
-<!--            <span class="input-field">-->
-<!--              <input type="text" class="app-input" formControlName="firstName">-->
-<!--              <small class="error" *ngIf="personalForm['firstName'].errors">error</small>-->
-<!--            </span>-->
-<!--          </span>-->
-<!--    <span>-->
-<!--            <h3>Middle Name</h3>-->
-<!--            <span class="input-field">-->
-<!--              <input type="text" class="app-input" formControlName="middleName">-->
-<!--              <small class="error">error</small>-->
-<!--            </span>-->
-<!--          </span>-->
-<!--    <span>-->
-<!--            <h3>Last Name</h3>-->
-<!--            <span class="input-field">-->
-<!--              <input type="text" class="app-input" formControlName="lastName">-->
-<!--              <small class="error">error</small>-->
-<!--            </span>-->
-<!--          </span>-->
-<!--    <span>-->
-<!--            <h3>Email ID</h3>-->
-<!--            <span class="input-field">-->
-<!--              <input type="text" class="app-input" formControlName="emailId">-->
-<!--              <small class="error">error</small>-->
-<!--            </span>-->
-<!--          </span>-->
-<!--    <span>-->
-<!--            <h3>Phone Number</h3>-->
-<!--            <span class="input-field">-->
-<!--              <input type="number" class="app-input" formControlName="phNumber">-->
-<!--              <small class="error">error</small>-->
-<!--            </span>-->
-<!--          </span>-->
-<!--    <span>-->
-<!--            <h3>DOB</h3>-->
-<!--            <span class="input-field">-->
-<!--              <input type="date" class="app-input" formControlName="DOB">-->
-<!--              <small class="error">error</small>-->
-<!--            </span>-->
-<!--          </span>-->
-<!--    <span>-->
-<!--            <h3>Gender</h3>-->
-<!--            <span class="input-radio-group">-->
-<!--              <span>-->
-<!--                <input id="male" value="male" type="radio" name="gender" formControlName="gender">-->
-<!--                <label style="width: 100%" for="male">Male</label>-->
-<!--              </span>-->
-<!--              <span>-->
-<!--                <input id="female" value="female" type="radio" name="gender" formControlName="gender">-->
-<!--                <label style="width: 100%" for="female">Female</label>-->
-<!--              </span>-->
-<!--              <span>-->
-<!--                <input id="not-specify" value="unspecified" type="radio" name="gender" formControlName="gender">-->
-<!--                <label style="width: 100%" for="not-specify">Rather Not Specify</label>-->
-<!--              </span>-->
-<!--            </span>-->
-<!--          </span>-->
-<!--    <span>-->
-<!--            <h3>Nationality</h3>-->
-<!--            <span class="input-field">-->
-<!--              <input type="text" class="app-input" formControlName="nationality">-->
-<!--              <small class="error">error</small>-->
-<!--            </span>-->
-<!--            </span>-->
-<!--    <span>-->
-<!--            <h3>Aadhar No</h3>-->
-<!--            <span class="input-field">-->
-<!--              <input type="text" class="app-input" formControlName="aadharNo">-->
-<!--              <small class="error">error</small>-->
-<!--            </span>-->
-<!--          </span>-->
-<!--    <span>-->
-<!--            <h3>PAN ID</h3>-->
-<!--            <span class="input-field">-->
-<!--              <input type="text" class="app-input" formControlName="panId">-->
-<!--              <small class="error">error</small>-->
-<!--            </span>-->
-<!--          </span>-->
-<!--  </form>-->
-<!--  <span>-->
-<!--          <button class="primary-button next" (click)="ProceedToNext()">Next-></button>-->
-<!--        </span>-->
-<!--</div>-->
-
-
-
-
 <section id="canister" class="canister">
-  <div class="navigator">
+  <div class="navigator" *ngIf="currentApplicationState!=applicationState.SUBMITTED">
     <a [class.active]="currentApplicationState==applicationState.PERSONAL"
        (click)="MoveTo(applicationState.PERSONAL)">Personal Details</a>
     <a [class.active]="currentApplicationState==applicationState.INCOME"
@@ -121,6 +22,7 @@
             <h3>First Name</h3>
             <span class="input-field">
               <input type="text" class="app-input" formControlName="firstName">
+
               <small class="error"
                      *ngIf="controlValid(personalForm,'firstName')">Field is invalid</small>
             </span>
@@ -129,8 +31,6 @@
             <h3>Middle Name</h3>
             <span class="input-field">
               <input type="text" class="app-input" formControlName="middleName">
-<!--              <small class="error"-->
-<!--                     *ngIf="personalForm.get('firstName')?.errors && (personalForm.get('firstName')?.touched || personalForm.get('firstName')?.dirty)">Field is invalid</small>-->
             </span>
           </span>
           <span>
@@ -531,6 +431,10 @@
           <button class="primary-button next" [disabled]="false" (click)="Register()">Register</button>
         </span>
       </fieldset>
+
+      <div *ngSwitchCase="applicationState.SUBMITTED" class="content" style="min-height: 160vh">
+        <app-loandetail2 [applicationDetails]="details"></app-loandetail2>
+      </div>
 
     </ng-container>
   </form>

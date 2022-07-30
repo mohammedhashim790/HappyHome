@@ -13,18 +13,22 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {ListServicesService} from "./Views/home/list-services.service";
 import { ApplicationStatusComponent } from './Views/application-status/application-status.component';
 import { AdminConsoleComponent } from './Views/admin-console/admin-console.component';
+import {SignUpComponent} from "./Views/sign-up/sign-up.component";
+import {Loandetail2Component} from "./Views/loandetail2/loandetail2.component";
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SignInComponent,
-    FloatingWidgetComponent,
-    RegistrationComponent,
-    ApplicationStatusComponent,
-    AdminConsoleComponent
-  ],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        SignInComponent,
+        SignUpComponent,
+        FloatingWidgetComponent,
+        RegistrationComponent,
+        ApplicationStatusComponent,
+        AdminConsoleComponent,
+        Loandetail2Component
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

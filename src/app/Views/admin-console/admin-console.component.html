@@ -1,23 +1,155 @@
+
+<floating-widget #viewDoc [widgetTitle]="viewableDocParams.title">
+  <img *ngIf="viewableDocParams.image;else pdfViewer"
+       [src]="sanitize(viewableDocParams.src)"
+       style="object-fit: scale-down;width: 100%;margin: 2%;min-height: 600px"/>
+
+  <ng-template #pdfViewer>
+    <iframe [src]="sanitize(viewableDocParams.src)" style="width: 100%;margin: 2%;min-height: 600px">
+    </iframe>
+  </ng-template>
+</floating-widget>
+
+<floating-widget #ConfirmUpdate [widgetTitle]="'Confirmation'">
+  <section style="display: flex;height: 160px;flex-direction: column;width: 80%;margin: auto;place-items: center;justify-content: center">
+
+    <h2>Are you sure you want confirm this action?</h2>
+    <input type="text" placeholder="Signature" class="app-input">
+    <button type="submit" class="primary-button">Approve</button>
+
+  </section>
+</floating-widget>
+
+<div class="menu-container">
+  <div>
+    <ion-icon name="reload"></ion-icon>
+  </div>
+  <span class="vertical-line"></span>
+  <div>
+    <h4 class="error">Applications : &#60;Count&#62;</h4>
+  </div>
+  <div>
+    <h4 class="error">Status : </h4>
+    <select>
+      <option selected>Applied</option>
+      <option>Verification</option>
+      <option>Approved</option>
+      <option>Rejected</option>
+    </select>
+  </div>
+  <div>
+    <h4 class="error">Sort (Time)</h4>
+    <select>
+      <option selected>Ascending</option>
+      <option>Descending</option>
+    </select>
+  </div>
+
+</div>
+
 <section class="canister">
+  <div class="navigator">
+    <a *ngFor="let application of applications;let index = index">{{index}}. {{'Application '+application}}</a>
+  </div>
   <div class="content-container">
-    <fieldset class="content" style="min-height: 160vh">
+    <fieldset class="content" style="min-height: 160vh" >
 
       <span class="app-input">
         <h2>Account Details</h2>
       </span>
-      <form class="input-fields">
-        <span>
-          <h3>Account Number</h3>
-          <span class="input-field">
-            <input type="text" class="app-input">
-          </span>
-        </span>
-      </form>
+      <table class="input-fields">
+        <tr style="width: 100%;display: flex;justify-content: space-evenly">
+          <td style="width: 100%;display: flex">
+            <span>
+              <h5>Account Number</h5>
+              <span class="input-field" >
+                <input type="text" class="app-input" [disabled]="true">
+              </span>
+            </span>
+          </td>
+          <td style="width: 100%;display: flex">
+            <span>
+              <h5>FullName</h5>
+              <span class="input-field" >
+                <input type="text" class="app-input" [disabled]="true">
+              </span>
+            </span>
+          </td>
+
+        </tr>
+
+        <tr style="width: 100%;display: flex;justify-content: space-evenly">
+          <td style="width: 100%;display: flex">
+            <span>
+              <h5>Email ID</h5>
+              <span class="input-field">
+                <input type="text" class="app-input" [disabled]="true">
+              </span>
+            </span>
+          </td>
+          <td style="width: 100%;display: flex">
+            <span>
+              <h5>Phone Number</h5>
+              <span class="input-field">
+                <input type="text" class="app-input" [disabled]="true">
+              </span>
+            </span>
+          </td>
+
+        </tr>
+
+        <tr style="width: 100%;display: flex;justify-content: space-evenly">
+          <td style="width: 100%;display: flex">
+            <span>
+              <h5>Aadhar No</h5>
+              <span class="input-field">
+                <input type="text" class="app-input" [disabled]="true">
+              </span>
+            </span>
+          </td>
+          <td style="width: 100%;display: flex">
+            <span>
+              <h5>Property Location</h5>
+              <span class="input-field">
+                <input type="text" class="app-input" [disabled]="true">
+              </span>
+            </span>
+          </td>
+
+        </tr>
+
+        <tr style="width: 100%;display: flex;justify-content: space-evenly">
+          <td style="width: 100%;display: flex">
+            <span>
+              <h5>Estimated Cost</h5>
+              <span class="input-field">
+                <input type="text" class="app-input" [disabled]="true">
+              </span>
+            </span>
+          </td>
+          <td style="width: 100%;display: flex">
+            <span>
+              <h5>Status</h5>
+              <span class="input-field">
+                <select #status (change)="onUpdateStatus(status.value)">
+                  <option [value]="applicationStatus.APPLIED" selected>Applied</option>
+                  <option [value]="applicationStatus.VERIFICATION">Verification</option>
+                  <option [value]="applicationStatus.APPROVED">Approved</option>
+                  <option [value]="applicationStatus.REJECTED">Rejected</option>
+                </select>
+              </span>
+            </span>
+          </td>
+
+        </tr>
+
+
+      </table>
 
       <span class="app-input">
         <h2>Personal Details</h2>
       </span>
-      <form class="input-fields" >
+      <fieldset class="input-fields" [disabled]="true">
         <span>
           <h3>First Name</h3>
           <span class="input-field">
@@ -89,12 +221,12 @@
             <input type="text" class="app-input" >
           </span>
         </span>
-      </form>
+      </fieldset>
       <!--        Income Details-->
       <span class="app-input">
         <h2>Income Details</h2>
       </span>
-      <form class="input-fields" >
+      <fieldset [disabled]="true" class="input-fields" >
         <span>
           <h3>Employment Type</h3>
           <span class="input-field">
@@ -137,12 +269,12 @@
             <input type="text" class="app-input" >
           </span>
         </span>
-      </form>
+      </fieldset>
       <!--        LOAN details-->
       <span class="app-input">
       <h2>Loan Details</h2>
       </span>
-      <form class="input-fields" >
+      <fieldset [disabled]="true" class="input-fields" >
         <span>
           <h3>Tenure</h3>
           <span class="input-field">
@@ -155,7 +287,62 @@
             <input type="number" class="app-input" >
           </span>
         </span>
+      </fieldset>
+      <!--  Document Details    -->
+      <span class="app-input">
+          <h2>Loan Details</h2>
+        </span>
+      <form class="document-field">
+        <span class="container" (click)="ViewDoc('PAN Card',true,'assets/documents/pancard.png')">
+          <h4>PAN ID</h4>
+          <span>
+            <img src="assets/documents/pancard.png">
+<!--            <input type="file" accept="image/png" value="Upload">-->
+          </span>
+        </span>
+        <span class="container" (click)="ViewDoc('Voter ID',true,'assets/documents/voter id.png')" >
+          <h4>Voter ID</h4>
+          <span>
+            <img src="assets/documents/voter%20id.png">
+
+<!--            <input type="file" accept="image/png" value="Upload">-->
+          </span>
+        </span>
+        <span class="container" (click)="ViewDoc('PaySlip',false,'assets/documents/payslip.pdf')">
+          <h4>Salary Slip</h4>
+          <span class="empty-background">
+            <ion-icon name="attach-outline"></ion-icon>
+            <h6>Click to View</h6>
+<!--            <input type="file" accept="image/png" value="Upload">-->
+          </span>
+        </span>
+        <span class="container" (click)="ViewDoc('LOA',false,'assets/documents/loa.pdf')">
+          <h4>LOA</h4>
+          <span class="empty-background">
+            <ion-icon name="attach-outline"></ion-icon>
+            <h6>Click to View</h6>
+<!--            <input type="file" accept="image/png" value="Upload">-->
+          </span>
+        </span>
+        <span class="container" (click)="ViewDoc('NOC',false,'assets/documents/noc.pdf')">
+          <h4>NOC</h4>
+          <span class="empty-background">
+            <ion-icon name="attach-outline"></ion-icon>
+            <h6>Click to View</h6>
+<!--            <input type="file" accept="image/png" value="Upload">-->
+          </span>
+        </span>
+        <span class="container">
+          <h4>Sale Agreement</h4>
+          <span>
+            <img src="assets/empty-image.png">
+<!--            <input type="file" accept="image/png" value="Upload">-->
+          </span>
+        </span>
       </form>
+
+
+
     </fieldset>
   </div>
 </section>

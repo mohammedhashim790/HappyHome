@@ -5,6 +5,8 @@ import {SignInComponent} from "./Views/sign-in/sign-in.component";
 import {SignUpComponent} from "./Views/sign-up/sign-up.component";
 import {RegistrationComponent} from "./Views/registration/registration.component";
 import {ApplicationStatusComponent} from "./Views/application-status/application-status.component";
+import {AdminConsoleComponent} from "./Views/admin-console/admin-console.component";
+import {AdminGuard} from "./Guards/AdminGuard/admin.guard";
 
 const routes: Routes = [
   {
@@ -30,6 +32,11 @@ const routes: Routes = [
   {
     path:'status',
     component:ApplicationStatusComponent
+  },
+  {
+    path:'admin',
+    canActivate:[AdminGuard],
+    component:AdminConsoleComponent
   }
 ];
 

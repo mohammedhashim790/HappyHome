@@ -42,10 +42,11 @@ ion-icon{
 .app-input{
   width: 90%;
   user-select: none;
-  padding: 2px;
+  padding: 5px;
   border: none;
   border-bottom: 1px slategrey solid;
   outline: none;
+
 }
 
 .empty-button{

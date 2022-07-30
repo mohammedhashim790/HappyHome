@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {GenApplicationID} from "../../Bloc/Bloc";
 
 export enum ApplicationState{
   PERSONAL,
   INCOME,
   LOAN,
   DOCUMENTS,
-  REVIEW
+  REVIEW,
+  SUBMITTED
 }
 
 export interface PersonalDetails{
@@ -34,10 +36,8 @@ export interface Application{
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-
-
   applicationState = ApplicationState;
-  currentApplicationState = ApplicationState.PERSONAL;
+  currentApplicationState = ApplicationState.PERSONAL ;
 
   details:FormGroup;
 
@@ -59,6 +59,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private router:Router) {
     this.details = new FormBuilder().group({
+      applicationId:GenApplicationID(),
       personal:new FormGroup({
         firstName:new FormControl('',[Validators.required]),
         middleName:new FormControl(''),
@@ -119,5 +120,6 @@ export class RegistrationComponent implements OnInit {
 
   Register() {
     console.log(this.details.value);
+    this.currentApplicationState = ApplicationState.SUBMITTED;
   }
 }

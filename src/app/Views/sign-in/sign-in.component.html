@@ -1,19 +1,31 @@
- <div class="Home">
+ <div class="canister">
     <div class="form-box">
-        <div class="button-box">
-            <div id="btn"></div>
-                    <button type="button" class="toggle-btn" onclick="login()">Login</button>
-                    
-        </div>
-        <form id="login" class="input-group" [formGroup]="details">
-                    <input type="text" class="input-field" placeholder="UserId" formControlName="username" required>
-                    <small class="error" *ngIf="details.get('username')?.errors?.['required'] && details.get('username')?.touched
-                        ||details.get('username')?.dirty">Field is invalid</small>
-                    <input type="text" class="input-field" placeholder="Enter Password" formControlName="password" required>
-                    <input type="checkbox" class="check-box"><span>Remember Password</span>
-                    <button type="submit" class="submit-btn" (click)="OnLogIn()"
-                                    [disabled]="this.details.invalid">Log in</button>
-        </form>
+      <span class="title">
+        <h4 class="active">
+          Login
+        </h4>
+        <h4 (click)="navigateTo('sign-up')">
+          SignUp
+        </h4>
+      </span>
+      <form id="login" class="input-group" [formGroup]="details">
+        <input type="text" class="app-input" placeholder="UserId" formControlName="username" required>
+        <span *ngIf="passwordHidden;else showPassword" class="app-input">
+          <input type="password"  placeholder="Enter Password" formControlName="password" required>
+          <ion-icon name="eye" (click)="passwordHidden = !passwordHidden"></ion-icon>
+        </span>
+        <ng-template #showPassword>
+          <span class="app-input">
+            <input type="text"  placeholder="Enter Password" formControlName="password" required>
+            <ion-icon name="eye-off" (click)="passwordHidden = !passwordHidden"></ion-icon>
+          </span>
+        </ng-template>
+        <span style="margin-left: 0;margin-right: auto;">
+          <input id="remember" type="checkbox" class="check-box">
+          <label for="remember">Remember Password</label>
+        </span>
+        <button type="submit" class="primary-button" (click)="OnLogIn()">Log in</button>
+      </form>
     </div>
 </div>
 

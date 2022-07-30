@@ -1,21 +1,41 @@
-<div class="Home">
+<div class="canister">
     <div class="form-box">
-        <div class="button-box">
-            <div id="btn"></div>
-                    <button type="button" class="toggle-btn" onclick="Signup()">Signup</button>
-        </div>
-        <form id="Signup" class="input-group" FormGroup="details">
-            <input type="text" class="input-field" placeholder="Enter Full name" FormControlName="fullname" required>
-            <small class="error" *ngIf="details.get('fullname')?.errors && details.get('fullname')?.touched
-                        ||details.get('fullname')?.dirty">Field is invalid</small>
-            <input type="text" class="input-field" placeholder="Enter Email id" FormControlName="Emailid" required>
-            <small class="error" *ngIf="details.get('Emailid')?.errors && details.get('Emailid')?.touched
-                        ||details.get('Emailid')?.dirty">Field is invalid</small>
-      <input type="text" class="input-field" placeholder="Create Password" FormControlName="password"required>
-            <input type="text" class="input-field" placeholder="Reenter Password" FormControlName="reenterpassword" required>
-            <input type="checkbox" class="check-box"><span>I agree to the terms and conditions</span>
-            <button type="submit" class="submit-btn" (click)="OnSignUp()">Register</button>
-        </form>
+      <span class="title">
+        <h4 (click)="navigateTo('sign-in')">
+          Login
+        </h4>
+        <h4 class="active" >
+          SignUp
+        </h4>
+      </span>
+      <form id="Signup" class="input-group" [formGroup]="details">
+        <span style="display:flex;flex-direction: column;width: 100%;">
+          <input type="text" class="app-input" placeholder="Full name" formControlName="fullName" required>
+          <small class="error" *ngIf="isValid('fullName')">Field is invalid</small>
+        </span>
+
+        <span style="display:flex;flex-direction: column;width: 100%;">
+          <input type="text" class="app-input" placeholder="Email" formControlName="emailId" required>
+          <small class="error" *ngIf="isValid('emailId')">Field is invalid</small>
+        </span>
+
+        <span style="display:flex;flex-direction: column;width: 100%;">
+          <input type="password" class="app-input" placeholder="Password" formControlName="password"required>
+          <small class="error" *ngIf="isValid('password')">Field is invalid</small>
+        </span>
+
+        <span style="display:flex;flex-direction: column;width: 100%;">
+          <input type="text" class="app-input" placeholder="Confirm Password" formControlName="confirmPassword" required>
+          <small class="error" *ngIf="isValid('confirmPassword')">Field is invalid</small>
+          <small class="error" *ngIf="formSubmitted && details.get('confirmPassword')!.value!=details.get('password')!.value">Password Do Not Match</small>
+
+        </span>
+        <span style="margin-left: 0;margin-right: auto;">
+          <input id="remember" type="checkbox" class="check-box">
+          <label for="remember" style="color: slategray"><small>By signing up, I agree to the terms and conditions</small></label>
+        </span>
+        <button type="submit" class="primary-button" (click)="OnSignUp()">Sign Up</button>
+      </form>
     </div>
 </div>
 
