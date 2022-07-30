@@ -1,3 +1,79 @@
+<floating-widget
+  #emiCalculator
+  [widgetTitle]="'EMI Calculator'"
+>
+  <form class="emi-calculator-container" [formGroup]="emiForm">
+    <span>
+      <h4>Loan</h4>
+      <span style="flex-direction: column;width: 100%">
+        <input type="text" class="app-input" placeholder="Loan" formControlName="loan">
+        <h6 *ngIf="emiForm.controls['loan'].invalid && (emiForm.controls['loan'].dirty || emiForm.controls['loan'].touched)" class="error">Field is invalid</h6>
+      </span>
+    </span>
+    <span>
+      <h4>Tenure</h4>
+      <span style="flex-direction: column;width: 100%">
+        <input type="text" class="app-input" placeholder="Tenure" formControlName="tenure">
+        <h6 *ngIf="emiForm.controls['tenure'].invalid && (emiForm.controls['tenure'].dirty || emiForm.controls['tenure'].touched)" class="error">Field is invalid</h6>
+      </span>
+    </span>
+    <span>
+      <h4>ROI</h4>
+      <span style="flex-direction: column;width: 100%">
+        <input [disabled]="true" [class.disabled-option]="true" type="text" class="app-input" placeholder="ROI" formControlName="roi">
+        <h6 *ngIf="emiForm.controls['roi'].invalid && (emiForm.controls['roi'].dirty || emiForm.controls['roi'].touched)" class="error">Field is invalid</h6>
+      </span>
+    </span>
+    <span>
+      <h4>EMI</h4>
+      <span style="flex-direction: column;width: 100%">
+        <input type="text" class="app-input" placeholder="EMI" [disabled]="true" formControlName="emi">
+      </span>
+    </span>
+    <span>
+      <button [disabled]="emiForm.invalid" [class.disabled-option]="emiForm.invalid" class="primary-button" (click)="CalculateEMI()">Calculate</button>
+    </span>
+
+  </form>
+
+</floating-widget>
+<floating-widget
+  #eligibilityWidget
+  [widgetTitle]="'Eligibility Calculator'"
+>
+  <form class="emi-calculator-container" [formGroup]="this.eligibilityForm">
+    <span>
+      <h4>Monthly Income</h4>
+      <span style="flex-direction: column;width: 100%">
+        <input type="text" class="app-input" placeholder="Monthly Income" formControlName="loan">
+        <h6 *ngIf="eligibilityForm.controls['loan'].invalid && (eligibilityForm.controls['loan'].dirty || eligibilityForm.controls['loan'].touched)" class="error">Field is invalid</h6>
+      </span>
+    </span>
+    <span>
+      <h4>ROI</h4>
+      <span style="flex-direction: column;width: 100%" >
+        <input type="text" class="app-input" placeholder="ROI" formControlName="roi" [disabled]="true">
+      </span>
+    </span>
+    <span>
+      <h4>Eligible Amt.</h4>
+      <span style="flex-direction: column;width: 100%" >
+        <input type="text" class="app-input" style="color: black" placeholder="Yes/No" formControlName="eligible" [disabled]="true">
+      </span>
+    </span>
+    <span>
+      <button
+        class="primary-button"
+        [disabled]="eligibilityForm.invalid"
+        [class.disabled-option]="eligibilityForm.invalid" (click)="CalculateEligibility()">
+        Calculate
+      </button>
+    </span>
+
+  </form>
+
+</floating-widget>
+
 <section class="canister">
   <div>
     <span class="advertisement-runner-container">
@@ -46,9 +122,9 @@
         </span>
         <span class="horizontal-line"></span>
         <span class="link-container">
-          <a>EMI Calculator</a>
+          <a (click)="emiCalculator.Show()">EMI Calculator</a>
           <a>Premium</a>
-          <a>Easy Calculator</a>
+          <a (click)="eligibilityWidget.Show()">Easy Calculator</a>
           <a>Verify Loan Application</a>
           <a>Service Request</a>
         </span>
@@ -106,16 +182,16 @@
       <label class="title">Companion</label>
       <span class="menu-tab">
         <span class="link-container companion-tab">
-          <button class="empty-button" style="background-color: #769FBC">
+          <button class="empty-button" style="background-color: #769FBC" (click)="eligibilityWidget.Show()">
             <h3>Eligibility Calculator</h3>
             <img class="right-align" src="assets/companion/offer%20-%201.png">
           </button>
-          <button class="empty-button" style="background-color: #63DBF2">
-            <h3>Eligibility Calculator</h3>
+          <button class="empty-button" style="background-color: #63DBF2" (click)="emiCalculator.Show()">
+            <h3>EMI Calculator</h3>
             <img class="right-align" src="assets/companion/offer%20-%202.png">
           </button>
           <button class="empty-button" style="background-color: #0C2D5E">
-            <h3>Eligibility Calculator</h3>
+            <h3>Talk to Rebecca</h3>
             <img class="right-align" src="assets/companion/rebecca.png">
           </button>
 

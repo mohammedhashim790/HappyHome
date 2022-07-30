@@ -5,8 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HomeComponent} from "./Views/home/home.component";
 import {SignInComponent} from "./Views/sign-in/sign-in.component";
+import {FloatingWidgetComponent} from "./Views/Widgets/floating-widget/floating-widget.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { Loandetail2Component } from './Views/loandetail2/loandetail2.component';
-import {SignUpComponent} from './Views/sign-up/sign-up.component';
+import { SignUpComponent } from './Views/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,15 @@ import {SignUpComponent} from './Views/sign-up/sign-up.component';
     HomeComponent,
     SignInComponent,
     SignUpComponent,
-    Loandetail2Component
+    Loandetail2Component,
+    FloatingWidgetComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

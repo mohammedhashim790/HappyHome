@@ -166,3 +166,27 @@
   object-fit: contain;
 }
 
+.emi-calculator-container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+}
+.emi-calculator-container span{
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 2%;
+}
+.emi-calculator-container span h4{
+  width: 30%;
+  /*text-align: center;*/
+  display: flex;
+  place-items: center;
+}
+.emi-calculator-container span{
+  width: 70%;
+}
