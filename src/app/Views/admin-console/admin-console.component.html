@@ -1,25 +1,4 @@
-
 <section class="canister">
-  <div class="status-container" style="height: 20%">
-    <span *ngIf="applicationStatus == ApplicationStatus.APPLIED">
-      <ion-icon src="assets/status/applied.svg"></ion-icon>
-      <h4 class="waiting-for-approval">Waiting for Approval</h4>
-    </span>
-    <span *ngIf="applicationStatus == ApplicationStatus.APPROVED">
-      <ion-icon src="assets/status/approved.svg"></ion-icon>
-      <h4 class="accepted">Request Approved</h4>
-      <h3>Requested amount will be transferred within 24 hours of working time</h3>
-    </span>
-
-    <span *ngIf="applicationStatus == ApplicationStatus.REJECTED">
-      <ion-icon src="assets/status/rejected.svg"></ion-icon>
-      <h4 class="rejected">Rejected</h4>
-    </span>
-    <span *ngIf="applicationStatus == ApplicationStatus.VERIFICATION">
-      <ion-icon src="assets/status/verification-progress.svg"></ion-icon>
-      <h4 class="waiting-for-approval">Verification in progress</h4>
-    </span>
-  </div>
   <div class="content-container">
     <fieldset class="content" style="min-height: 160vh">
 

@@ -74,4 +74,8 @@ export class HomeComponent implements OnInit {
       console.log(res);
     })
   }
+
+  FindLoan() {
+    this.router.navigate(['status'],{queryParams:{id:'Id1234ad'}});
+  }
 }
