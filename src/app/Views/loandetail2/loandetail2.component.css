@@ -1,0 +1,8 @@
+.loanbox{
+display: flex;
+flex-direction: column;
+justify-content: center;
+place-items: center;
+align-items:center;
+min-height:30vh;
+}

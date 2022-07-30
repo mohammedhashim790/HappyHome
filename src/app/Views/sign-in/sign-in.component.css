@@ -24,15 +24,18 @@
     border:0;
     outline:none;
     position:relative;
+    left:-200px;
+    border-bottom:1px solid #999;
+    font-family:verdana;
+    font-size:20px;
 }
 #btn{
+    font-size:30px;
     top:0;
     left:0;
     position:absolute;
     width:110px;
     height:100%;
-    background-color:green;
-    border-radius:30px;
     transition:.5s;
 }
 .input-group{
@@ -57,7 +60,7 @@
     cursor:pointer;
     display:block;
     margin:auto;
-    background:green;
+    background:#005C6D;
     border:0;
     outline:none;
     border-radius:30px;
