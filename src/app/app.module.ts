@@ -12,6 +12,7 @@ import { RegistrationComponent } from './Views/registration/registration.compone
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {ListServicesService} from "./Views/home/list-services.service";
 import { ApplicationStatusComponent } from './Views/application-status/application-status.component';
+import { AdminConsoleComponent } from './Views/admin-console/admin-console.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ApplicationStatusComponent } from './Views/application-status/applicati
     SignInComponent,
     FloatingWidgetComponent,
     RegistrationComponent,
-    ApplicationStatusComponent
+    ApplicationStatusComponent,
+    AdminConsoleComponent
   ],
   imports: [
     BrowserModule,

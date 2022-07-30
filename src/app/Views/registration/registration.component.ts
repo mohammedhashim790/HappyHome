@@ -119,6 +119,5 @@ export class RegistrationComponent implements OnInit {
 
   Register() {
     console.log(this.details.value);
-    this.router.navigate(['status'],{queryParams:{id:'Id1234ad'}});
   }
 }
