@@ -116,9 +116,9 @@
       <label class="title">Services</label>
       <span class="menu-tab">
         <span class="link-container" style="flex-direction: row">
-          <button class="empty-button"><h3>Contact Us</h3></button>
+          <button class="empty-button" (click)="TestMethod()"><h3>Contact Us</h3></button>
           <span class="vertical-line"></span>
-          <button class="empty-button"><h3>Login</h3></button>
+          <button class="empty-button" (click)="navigateTo('sign-in')"><h3>Login</h3></button>
         </span>
         <span class="horizontal-line"></span>
         <span class="link-container">

@@ -8,6 +8,10 @@ import {SignInComponent} from "./Views/sign-in/sign-in.component";
 import {FloatingWidgetComponent} from "./Views/Widgets/floating-widget/floating-widget.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { RegistrationComponent } from './Views/registration/registration.component';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {ListServicesService} from "./Views/home/list-services.service";
+import { ApplicationStatusComponent } from './Views/application-status/application-status.component';
 
 
 @NgModule({
@@ -15,17 +19,20 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AppComponent,
     HomeComponent,
     SignInComponent,
-    FloatingWidgetComponent
+    FloatingWidgetComponent,
+    RegistrationComponent,
+    ApplicationStatusComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [ListServicesService,HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

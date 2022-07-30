@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {ListServicesService} from "./list-services.service";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,7 @@ export class HomeComponent implements OnInit {
   emiForm:FormGroup;
   eligibilityForm:FormGroup;
 
-  constructor() {
+  constructor(private router:Router,private listService:ListServicesService) {
     this.emiForm = new FormBuilder().group({
       'loan':new FormControl('',[Validators.required]),
       'tenure':new FormControl('',[Validators.required]),
@@ -59,5 +61,17 @@ export class HomeComponent implements OnInit {
     let eligible = 60 * (0.6 * loan) / 100
     console.log(eligible);
     this.eligibilityForm.controls['eligible'].setValue(eligible);
+  }
+
+  navigateTo(path: string) {
+    this.router.navigateByUrl(path);
+  }
+
+  TestMethod() {
+    console.log("clicked");
+    console.log("clicked");
+    this.listService.ListDepartments().subscribe((res)=>{
+      console.log(res);
+    })
   }
 }

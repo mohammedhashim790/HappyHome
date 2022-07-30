@@ -38,12 +38,14 @@
   gap: 5px;
 }
 footer{
-  width: 97%;
+  width: 98%;
   height: auto;
   padding: 1.0rem;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  /*position: absolute;*/
+  /*bottom: 0;*/
 }
 
 footer .links-container{

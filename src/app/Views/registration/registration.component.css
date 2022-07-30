@@ -1,0 +1,122 @@
+.canister{
+  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  padding-top: 2.0rem;
+  padding-bottom: 2.0rem;
+  margin: auto;
+  border: 1px solid black;
+}
+.canister .navigator{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 20%;
+  /*justify-content: center;*/
+  padding: 1.0rem;
+  place-items: center;
+}
+.canister .navigator a{
+  width: 90%;
+  padding: 0.5rem;
+  /*text-align: center;*/
+  display: flex;
+  /*justify-content: center;*/
+  place-items: center;
+  border-radius: 100px;
+  border: 1px solid #005C6D;
+  background-color: white;
+  color: #005C6D;
+}
+.active{
+  background-color: #005C6D !important;
+  color: white !important;
+}
+.canister .content-container{
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  /*place-items: center;*/
+  min-height: 60vh;
+}
+.canister .content-container .content{
+  width: 100%;
+  height: auto;
+  /*padding: 1.0rem 0;*/
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+.canister .content-container .input-fields{
+  width: 70%;
+  height: auto;
+  padding: 1.0rem 0;
+  display: flex;
+  flex-direction: column;
+  margin: 2% auto;
+  gap: 10px;
+}
+.canister .content-container .input-fields span{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  place-items: center;
+  width: 100%;
+
+}
+.canister .content-container .input-fields span label,.canister .content-container .input-fields span h3 {
+  width: 30%;
+}
+.canister .content-container .input-fields .input-field{
+  width: 100%;
+  flex-direction: column;
+  justify-content: start;
+  place-items: start;
+}
+.canister .content-container .input-fields .input-field input{
+  padding: 0.5rem;
+}
+.canister .content-container .input-fields .input-field .input-radio-group{
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.next{
+  display: flex;
+  margin: auto;
+}
+
+.canister .content-container .document-field{
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 5%;
+  grid-row-gap: 10%;
+  width: 90%;
+  height: 100%;
+}
+.canister .content-container .document-field .container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /*height: 150px;*/
+}
+.canister .content-container .document-field .container > *{
+  width: 100%;
+}
+.canister .content-container .document-field .container span{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+.canister .content-container .document-field .container span img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: scale-down;
+}
+.app-input{
+  display: flex;
+  flex-direction: row;
+}
