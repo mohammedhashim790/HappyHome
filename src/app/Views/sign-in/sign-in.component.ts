@@ -1,6 +1,8 @@
 import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {Router} from "@angular/router"
+import {UserService} from "../../Bloc/Services/User/user.service";
+import {UserTable} from "../../Bloc/Interfaces/Interfaces";
 
 @Component({
   selector: 'app-sign-in',
@@ -11,7 +13,7 @@ export class SignInComponent implements OnInit {
   details:FormGroup;
   passwordHidden: boolean = true;
 
-  constructor(private router:Router) {
+  constructor(private router:Router,private userService:UserService) {
     this.details=new FormBuilder().group({
       'username':new FormControl('',[Validators.required]),
       'password':new FormControl('',[Validators.required])
@@ -24,6 +26,15 @@ export class SignInComponent implements OnInit {
   OnLogIn(){
     console.log("logging in")
     console.log(this.details.value);
+
+    let res:UserTable = {
+      emailId:this.details.get('username')?.value,
+      Password:this.details.get('password')?.value
+    }
+    this.userService.AuthenticateUser(res).subscribe((res)=>{
+      console.log(res);
+    })
+
   }
 
   navigateTo(path: string) {

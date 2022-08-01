@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ListServicesService} from "./list-services.service";
+import {UserAccountService} from "../../Bloc/Services/UserAccount/user-account.service";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,9 @@ export class HomeComponent implements OnInit {
   emiForm:FormGroup;
   eligibilityForm:FormGroup;
 
-  constructor(private router:Router,private listService:ListServicesService) {
+  constructor(private router:Router,
+              private listService:ListServicesService,
+              private accountService:UserAccountService) {
     this.emiForm = new FormBuilder().group({
       'loan':new FormControl('',[Validators.required]),
       'tenure':new FormControl('',[Validators.required]),
@@ -70,9 +73,11 @@ export class HomeComponent implements OnInit {
   TestMethod() {
     console.log("clicked");
     console.log("clicked");
-    this.listService.ListDepartments().subscribe((res)=>{
+    this.accountService.ListUserAccount().subscribe((res)=>{
+      console.log("Results");
       console.log(res);
     })
+
   }
 
   FindLoan() {

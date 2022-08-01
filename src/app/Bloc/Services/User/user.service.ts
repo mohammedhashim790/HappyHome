@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
+import {UserTable} from "../../Interfaces/Interfaces";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private url:string = environment.apiUrl;
+
+
+  private controllerName:string = "User/"
+  private url:string = environment.apiUrl + this.controllerName;
+
   private httpOptions = {
     headers: new HttpHeaders({
       'Accept':'*',
@@ -24,20 +29,27 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   ListUsers(){
-    return this.http.get(this.url,this.httpOptions);
+    return this.http.get<UserTable>(this.url,this.httpOptions).pipe();
   }
 
   GetUserById(id:number){
-    return this.http.get(this.url,{
+    return this.http.get<UserTable>(this.url,{
       params:{
         id:id
       },
       headers:this.header
-    })
-  }
-  
-  UpdateUser(user:any){
-    return this.http.post(this.url,user,this.httpOptions)
+    }).pipe();
   }
 
+  UpdateUser(user:UserTable){
+    return this.http.post<UserTable>(this.url,user,this.httpOptions).pipe()
+  }
+
+  CreateUser(user:UserTable) {
+    return this.http.post<UserTable>(this.url,user,this.httpOptions).pipe();
+  }
+
+  AuthenticateUser(user:UserTable){
+    return this.http.post<UserTable>(this.url + 'authenticate',user,this.httpOptions);
+  }
 }
