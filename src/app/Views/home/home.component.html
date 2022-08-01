@@ -87,7 +87,8 @@
       <h3>
         Quick Loan Tracker
       </h3>
-      <input type="text" class="app-input" placeholder="Loan Tracker Number">
+      <input type="text" class="app-input" placeholder="Loan Tracker Number" [formControl]="trackerId">
+      <small class="error" *ngIf="trackerId.errors?.['invalid']">Loan ID not found</small>
       <button class="primary-button" (click)="FindLoan()">
         <h5>Find</h5>
       </button>
@@ -118,7 +119,14 @@
         <span class="link-container" style="flex-direction: row">
           <button class="empty-button" (click)="TestMethod()"><h3>Contact Us</h3></button>
           <span class="vertical-line"></span>
-          <button class="empty-button" (click)="navigateTo('sign-in')"><h3>Login</h3></button>
+          <button *ngIf="UserParams.UserParams == undefined;else signOut" class="empty-button" (click)="navigateTo('sign-in')">
+            <h3>Login</h3>
+          </button>
+          <ng-template #signOut>
+            <button class="empty-button" (click)="UserParams.LogOut()">
+              <h3>Log Out</h3>
+            </button>
+          </ng-template>
         </span>
         <span class="horizontal-line"></span>
         <span class="link-container">

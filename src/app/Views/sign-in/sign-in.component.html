@@ -10,6 +10,7 @@
       </span>
       <form id="login" class="input-group" [formGroup]="details">
         <input type="text" class="app-input" placeholder="UserId" formControlName="username" required>
+        <small class="error" *ngIf="details.get('username')?.errors?.['invalid']">Email or Password is incorrect</small>
         <span *ngIf="passwordHidden;else showPassword" class="app-input">
           <input type="password"  placeholder="Enter Password" formControlName="password" required>
           <ion-icon name="eye" (click)="passwordHidden = !passwordHidden"></ion-icon>

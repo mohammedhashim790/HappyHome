@@ -46,7 +46,7 @@ export class UserService {
   }
 
   CreateUser(user:UserTable) {
-    return this.http.post<UserTable>(this.url,user,this.httpOptions).pipe();
+    return this.http.post<UserTable>(this.url + 'AddUser',user,this.httpOptions).pipe();
   }
 
   AuthenticateUser(user:UserTable){

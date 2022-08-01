@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import {Router} from "@angular/router"
 import {UserService} from "../../Bloc/Services/User/user.service";
 import {UserTable} from "../../Bloc/Interfaces/Interfaces";
+import {UserParams} from "../../Bloc/UserParams";
 
 @Component({
   selector: 'app-sign-in',
@@ -29,10 +30,22 @@ export class SignInComponent implements OnInit {
 
     let res:UserTable = {
       emailId:this.details.get('username')?.value,
-      Password:this.details.get('password')?.value
+      password:this.details.get('password')?.value
     }
     this.userService.AuthenticateUser(res).subscribe((res)=>{
       console.log(res);
+      UserParams.UserParams = res;
+      console.log(UserParams.UserParams);
+      this.navigateTo('');
+    },error => {
+      console.error(error);
+      this.details.controls['username'].setErrors({
+        'invalid':error.error
+      });
+      setTimeout(()=>{
+        this.details.setErrors({});
+      },1500);
+      UserParams.LogOut();
     })
 
   }

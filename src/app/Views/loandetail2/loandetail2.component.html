@@ -7,19 +7,19 @@
         <th><h3>Application Number</h3></th>
         <th>
           <h3>
-            {{applicationDetails.get('applicationId')!.value}}
+            {{applicationDetails.get('account_ID')!.value}}
           </h3>
           <ion-icon name="copy"></ion-icon>
         </th>
     </tr>
     <tr>
         <th><h3>Name</h3></th>
-        <th><h3>{{applicationDetails.get('personal')!.get('firstName')!.value}}</h3></th>
+        <th><h3>{{applicationDetails.get('userTable')!.get('firstName')!.value}}</h3></th>
     </tr>
     <tr>
         <th><h3>Email id</h3></th>
         <th>
-          <h3>{{applicationDetails.get('personal')!.get('emailId')!.value}}</h3>
+          <h3>{{applicationDetails.get('userTable')!.get('emailId')!.value}}</h3>
         </th>
     </tr>
   </table>

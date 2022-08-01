@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import { UserParams } from './Bloc/UserParams';
+import {UserAccountService} from "./Bloc/Services/UserAccount/user-account.service";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +11,8 @@ import {Router} from "@angular/router";
 export class AppComponent {
   title = 'HappyHome';
 
+  UserParams = UserParams;
+
   constructor(private router:Router) {
   }
 
@@ -16,4 +20,12 @@ export class AppComponent {
     this.router.navigateByUrl(path);
   }
 
+  OnSignOut() {
+    UserParams.LogOut();
+    this.router.navigateByUrl('');
+  }
+
+  Check(){
+
+  }
 }

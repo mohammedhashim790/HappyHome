@@ -1,3 +1,5 @@
+
+
 export interface DocumentDetails{
     ID?:number;
     Aadhar_Number?:string;
@@ -11,66 +13,69 @@ export interface DocumentDetails{
     Collateral?:string;
 }
 export interface IncomeDetails{
-    ID?:number;
-    Current_Sallary?:number;
-    propertyLocation?:string;
-    employerName?:string;
-    estimatedCost?:number;
-    Occupation?:string;
-    Employer_Name?:string;
-    employmentType?:string;
-    retire?:number;
-    propertyName?:string;
+  id?:number;
+  current_Sallary?:number;
+  propertyLocation?:string;
+  employerName?:string;
+  estimatedCost?:number;
+  occupation?:string;
+  employer_Name?:string;
+  employmentType?:string;
+  retire?:number;
+  propertyName?:string;
 }
 export interface LoanDetails{
-    Amount_Required?:number;
-    tenure?:string;
-    No_of_installments?:number;
-    Reference_Number?:number;
-    ID?:number;
-    loanAmount?:number;
-    Elgible_Amount?:number;
-    ROI?:number;
+  amount_Required?:number;
+  tenure?:string;
+  no_of_installments?:number;
+  reference_Number?:number;
+  id?:number;
+  loanAmount?:number;
+  elgible_Amount?:number;
+  roi?:number;
 }
 export interface UserTable{
-    firstName?:string;
+  firstName?:string;
+  lastName?:string;
     Id?:number;
     middleName?:string;
     emailId?:string;
-    Password?:string;
+  password?:string;
     phNumber?:number;
-    DOB?:string;
+  dob?:string;
     gender?:string;
     nationality ?:string;
     adharNo?:string;
     panId?:string;
-    Token?:string;
+  token?:string;
+    is_Admin?:boolean;
 }
 export interface UserAccountTable{
-    ID?:number;
-    Account_ID?:string
-    Status?:string;
-    Created_At?:string;
-    Updated_At?:string;
-    Signature?:string;
-    UserTable?:UserTable;
-    UserLoan?:UserLoan;
+    id?:number;
+    account_ID?:string
+  status?:string;
+  created_At?:string;
+  updated_At?:string;
+  signature?:string;
+  userTable?:UserTable;
+  userLoan?:UserLoan;
 }
 export interface UserLoan{
-    Due_Date?:string;
-    Next_Due_Date?:string;
-    Remaining_Amount?:number;
-    Date_Sanctioned?:string;
-    LoanDetails?:LoanDetails;
-    UserBank?:UserBankDetails;
-    IncomeDetails?:IncomeDetails;
-    DocumentDetails?:DocumentDetails;
-    UserDetails?:UserTable;
+  due_Date?:string;
+  amount?:string,
+  next_Due_Date?:string;
+  remaining_Amount?:number;
+  date_Sanctioned?:string;
+  loanDetails?:LoanDetails;
+  userBank?:UserBankDetails;
+  incomeDetails?:IncomeDetails;
+  documentDetails?:DocumentDetails;
+  userDetails?:UserTable;
 }
 export interface UserBankDetails{
-    ID?:number;
-    Bank_Name ?:string;
-    Account_Number?:string;
-    Address?:string;
-    IFSC?:string;
+  id?:number;
+  bank_Name ?:string;
+  account_Number?:string;
+  address?:string;
+  ifsc?:string;
 }

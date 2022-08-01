@@ -34,14 +34,22 @@
     <h5>Apply Now</h5>
   </a>
 
-  <a class="right-align" (click)="navigateTo('admin')">
-    <ion-icon name="person"></ion-icon>
-    <h5>Admin</h5>
-  </a>
-  <a class="right-align" style="margin-left: unset" (click)="navigateTo('sign-in')">
-    <ion-icon name="log-in-outline"></ion-icon>
-    <h5>Login</h5>
-  </a>
+  <span class="right-align" style="display: flex;gap: 15px">
+    <a *ngIf="UserParams.UserParams!=undefined && UserParams.UserParams?.is_Admin == true" class="right-align" (click)="navigateTo('admin')">
+      <ion-icon name="person"></ion-icon>
+      <h5>Admin</h5>
+    </a>
+    <a *ngIf="UserParams.UserParams == undefined;else signOut" class="right-align" style="margin-left: unset" (click)="navigateTo('sign-in')">
+      <ion-icon name="log-in-outline"></ion-icon>
+      <h5>Login</h5>
+    </a>
+    <ng-template #signOut>
+      <a class="right-align" style="margin-left: unset" (click)="OnSignOut()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <h5>Sign Out</h5>
+      </a>
+    </ng-template>
+  </span>
 </nav>
 
 <router-outlet></router-outlet>

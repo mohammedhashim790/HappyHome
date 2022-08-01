@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {GenApplicationID} from "../../Bloc/Bloc";
+import {UserAccountService} from "../../Bloc/Services/UserAccount/user-account.service";
+import {UserAccountTable} from "../../Bloc/Interfaces/Interfaces";
+import {ApplicationStatus} from "../application-status/application-status.component";
 
 export enum ApplicationState{
   PERSONAL,
@@ -25,10 +28,62 @@ export interface PersonalDetails{
   panId:string;
 }
 
+const reqMap = {
+  "account_ID": "",
+  "status": "",
+  "signature": "",
+  "UserTable": {
+    "firstName": "",
+    "middleName": "",
+    "lastName": "",
+    "emailId": "",
+    "password": "",
+    "phNumber": 0,
+    "dob": "",
+    "gender": "",
+    "nationality": "",
+    "adharNo": "",
+    "panId": "",
+    "token": ""
+  },
+  "UserLoan": {
+    "amount": 0,
+    "due_Date": "",
+    "next_Due_Date": "",
+    "remaining_Amount": 0,
+    "date_Sanctioned": "",
+    "loanDetails": {
+      "amount_Required": 0,
+      "tenure": "",
+      "no_of_installments": 0,
+      "reference_Number": 0,
+      "loanAmount": 0,
+      "elgible_Amount": 0,
+      "roi": 0
+    },
+    "userBank": {
+      "bank_Name": "",
+      "account_Number": "",
+      "address": "",
+      "ifsc": ""
+    },
+    "incomeDetails": {
+      "current_Sallary": 0,
+      "propertyLocation": "",
+      "employerName": "",
+      "estimatedCost": 0,
+      "occupation": "",
+      "employer_Name": "",
+      "employmentType": "",
+      "retire": 0,
+      "propertyName": ""
+    },
+    "documentDetails": "",
+    "userDetails": ""
+  }
+};
 
-export interface Application{
 
-}
 
 @Component({
   selector: 'app-registration',
@@ -41,8 +96,10 @@ export class RegistrationComponent implements OnInit {
 
   details:FormGroup;
 
-  get personalForm(){
-    return this.details.controls["personal"];
+
+
+  get userTableForm(){
+    return this.details.controls["userTable"];
   }
 
   get incomeForm(){
@@ -57,19 +114,19 @@ export class RegistrationComponent implements OnInit {
     return this.details.controls["documents"];
   }
 
-  constructor(private router:Router) {
+  constructor(private router:Router,private accountService:UserAccountService) {
     this.details = new FormBuilder().group({
-      applicationId:GenApplicationID(),
-      personal:new FormGroup({
+      account_ID:GenApplicationID(),
+      userTable:new FormGroup({
         firstName:new FormControl('',[Validators.required]),
         middleName:new FormControl(''),
         lastName:new FormControl('',[Validators.required]),
         emailId:new FormControl('',[Validators.required,Validators.email]),
         phNumber:new FormControl('',[Validators.required,Validators.pattern("[0-9]{10}")]),
-        DOB:new FormControl('',[Validators.required,Validators.required]),
+        dob:new FormControl('',[Validators.required,Validators.required]),
         gender:new FormControl('',[Validators.required]),
         nationality:new FormControl('',[Validators.required]),
-        aadharNo:new FormControl('',[Validators.required]),
+        adharNo:new FormControl('',[Validators.required]),
         panId:new FormControl('',[Validators.required]),
       }),
       income:new FormGroup({
@@ -79,6 +136,7 @@ export class RegistrationComponent implements OnInit {
         employerName:new FormControl('',[Validators.required]),
         propertyLocation:new FormControl('',[Validators.required]),
         propertyName:new FormControl('',[Validators.required]),
+        current_Sallary:new FormControl(0,),
         estimatedCost:new FormControl('',[Validators.required,Validators.pattern("[0-9]{1,}")]),
       }),
       loan:new FormGroup({
@@ -119,7 +177,56 @@ export class RegistrationComponent implements OnInit {
   }
 
   Register() {
-    console.log(this.details.value);
-    this.currentApplicationState = ApplicationState.SUBMITTED;
+
+    let query = this.InitializeData();
+
+    console.log("Submitting Form");
+    console.log(query);
+    this.accountService.CreateNewAccount(query).subscribe((resp)=>{
+      console.log("Submitted Form");
+      this.currentApplicationState = ApplicationState.SUBMITTED;
+    },error => {
+      console.error("Error Creating New User Account");
+      console.error(error);
+    })
+
+    // this.currentApplicationState = ApplicationState.SUBMITTED;
   }
+
+  InitializeData(){
+    let req = {
+      "account_ID": this.details.get('account_ID')?.value,
+      "status": ApplicationStatus.APPLIED,
+      "UserTable": this.userTableForm.value,
+      "UserLoan": {
+        "amount": 0,
+        "due_Date": "0001-01-01T00:00:00",
+        "next_Due_Date": "0001-01-01T00:00:00",
+        "remaining_Amount": 0,
+        "date_Sanctioned": "0001-01-01T00:00:00",
+        "loanDetails": {
+          "amount_Required": this.loanForm.get('loanAmount')?.value,
+          "tenure": this.loanForm.get('tenure')?.value,
+          "no_of_installments": 0,
+          "reference_Number": 0,
+          "loanAmount": 0,
+          "elgible_Amount": 0,
+          "roi": 0
+        },
+        "userBank": {
+          "bank_Name": "",
+          "account_Number": "",
+          "address": "",
+          "ifsc": ""
+        },
+        "incomeDetails": this.incomeForm.value,
+        "documentDetails": null,
+        "userDetails": null
+      }
+    }
+
+
+    return req as UserAccountTable;
+  }
+
 }

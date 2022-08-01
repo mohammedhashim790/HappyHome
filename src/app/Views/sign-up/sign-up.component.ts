@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {GenApplicationID} from "../../Bloc/Bloc";
+import {UserTable} from "../../Bloc/Interfaces/Interfaces";
+import {UserParams} from "../../Bloc/UserParams";
+import {UserService} from "../../Bloc/Services/User/user.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +14,7 @@ import {GenApplicationID} from "../../Bloc/Bloc";
 export class SignUpComponent implements OnInit {
  details:FormGroup;
   formSubmitted: boolean = false;
-  constructor(private router:Router) {
+  constructor(private router:Router,private userService:UserService) {
     this.details=new FormBuilder().group({
       'fullName':new FormControl('',[Validators.required]),
       'emailId':new FormControl('',[Validators.required]),
@@ -29,8 +32,26 @@ export class SignUpComponent implements OnInit {
   }
   OnSignUp(){
     this.formSubmitted = true;
-    console.log(GenApplicationID())
-    console.log(this.details.value);
+    let name = this.details.get('fullName')?.value.split(" ");
+    let res:UserTable = {
+      firstName:(name[0]),
+      lastName:(name.length>1)?name[1]:"",
+      emailId:this.details.get('emailId')?.value,
+      password:this.details.get('password')?.value
+    }
+    this.userService.CreateUser(res).subscribe((res)=>{
+      console.log(res);
+      this.navigateTo('sign-in');
+    },error => {
+      console.error(error);
+      this.details.controls['emailId'].setErrors({
+        'invalid':error.error
+      });
+      setTimeout(()=>{
+        this.details.setErrors({});
+      },1500);
+      UserParams.LogOut();
+    })
   }
 
   navigateTo(path: string) {

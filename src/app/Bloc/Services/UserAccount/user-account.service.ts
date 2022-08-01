@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {UserAccountTable, UserTable} from "../../Interfaces/Interfaces";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -26,29 +27,29 @@ export class UserAccountService {
 
   constructor(private http:HttpClient) { }
 
-  ListUserAccount(){
-    return this.http.get<UserAccountTable>(this.url + 'GetAllAcc',this.httpOptions).pipe();
+  ListUserAccount():Observable<Array<UserAccountTable>>{
+    return this.http.get<Array<UserAccountTable>>(this.url + 'GetAllAcc',this.httpOptions).pipe();
   }
 
-  CreateNewAccount(model:UserTable){
-    return this.http.post<UserTable>(this.url + 'CreateACCP',model,this.httpOptions).pipe();
+  CreateNewAccount(model:UserAccountTable){
+    return this.http.post<UserAccountTable>(this.url + 'CreateACCP',model,this.httpOptions).pipe();
   }
 
 
-  UpdateAccount(id:number,model:UserTable){
-    return this.http.post(this.url,model,{
-      params:{
-        id:id
-      },
+  UpdateAccount(id:number,model:UserAccountTable){
+    return this.http.put(this.url + 'UpdateAccount/'+id,model,{
       headers:this.header
     }).pipe();
   }
 
-  GetAccountById(id:any){
-    return this.http.get<UserTable>(this.url,{
-      params:{
-        id:id
-      },
+  GetAccountByAccountId(id:any){
+    return this.http.get<UserAccountTable>(this.url + 'GetByAccoutNumber/'+id,{
+      headers:this.header
+    }).pipe();
+  }
+
+  GetAccountById(id:number) {
+    return this.http.get<UserAccountTable>(this.url + 'Getaccount/'+id,{
       headers:this.header
     }).pipe();
   }

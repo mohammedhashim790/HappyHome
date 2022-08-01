@@ -14,8 +14,8 @@
   <section style="display: flex;height: 160px;flex-direction: column;width: 80%;margin: auto;place-items: center;justify-content: center">
 
     <h2>Are you sure you want confirm this action?</h2>
-    <input type="text" placeholder="Signature" class="app-input">
-    <button type="submit" class="primary-button">Approve</button>
+    <input #signature type="text" placeholder="Signature" class="app-input">
+    <button type="submit" class="primary-button" (click)="OnUpdateApprove(signature.value)">Approve</button>
 
   </section>
 </floating-widget>
@@ -26,7 +26,7 @@
   </div>
   <span class="vertical-line"></span>
   <div>
-    <h4 class="error">Applications : &#60;Count&#62;</h4>
+    <h4 class="error">Applications : &#60;{{(accounts.length)}}&#62;</h4>
   </div>
   <div>
     <h4 class="error">Status : </h4>
@@ -49,11 +49,15 @@
 
 <section class="canister">
   <div class="navigator">
-    <a *ngFor="let application of applications;let index = index">{{index}}. {{'Application '+application}}</a>
+    <a
+      *ngFor="let account of accounts;let index = index"
+      (click)="selectedIndex = index"
+      [class.active]="selectedIndex == index">
+      {{index+1}}. {{account.account_ID}}
+    </a>
   </div>
   <div class="content-container">
-    <fieldset class="content" style="min-height: 160vh" >
-
+    <fieldset class="content" style="min-height: 160vh" *ngIf="selectedIndex!=-1">
       <span class="app-input">
         <h2>Account Details</h2>
       </span>
@@ -63,7 +67,8 @@
             <span>
               <h5>Account Number</h5>
               <span class="input-field" >
-                <input type="text" class="app-input" [disabled]="true">
+                <input type="text" class="app-input" [disabled]="true"
+                       [value]="this.accounts[selectedIndex]!.account_ID">
               </span>
             </span>
           </td>
@@ -71,7 +76,8 @@
             <span>
               <h5>FullName</h5>
               <span class="input-field" >
-                <input type="text" class="app-input" [disabled]="true">
+                <input type="text" class="app-input" [disabled]="true"
+                       [value]="this.accounts[selectedIndex]!.userTable!.firstName">
               </span>
             </span>
           </td>
@@ -83,7 +89,10 @@
             <span>
               <h5>Email ID</h5>
               <span class="input-field">
-                <input type="text" class="app-input" [disabled]="true">
+                <input type="text"
+                       class="app-input"
+                       [disabled]="true"
+                       [value]="this.accounts[selectedIndex]!.userTable!.emailId">
               </span>
             </span>
           </td>
@@ -91,7 +100,9 @@
             <span>
               <h5>Phone Number</h5>
               <span class="input-field">
-                <input type="text" class="app-input" [disabled]="true">
+                <input type="text"
+                       [value]="this.accounts[selectedIndex]!.userTable!.phNumber"
+                       class="app-input" [disabled]="true" >
               </span>
             </span>
           </td>
@@ -103,7 +114,9 @@
             <span>
               <h5>Aadhar No</h5>
               <span class="input-field">
-                <input type="text" class="app-input" [disabled]="true">
+                <input type="text"
+                       [value]="this.accounts[selectedIndex]!.userTable!.adharNo"
+                       class="app-input" [disabled]="true">
               </span>
             </span>
           </td>
@@ -111,7 +124,9 @@
             <span>
               <h5>Property Location</h5>
               <span class="input-field">
-                <input type="text" class="app-input" [disabled]="true">
+                <input type="text"
+                       [value]="this.accounts[selectedIndex]!.userLoan!.incomeDetails!.propertyLocation"
+                       class="app-input" [disabled]="true">
               </span>
             </span>
           </td>
@@ -123,7 +138,9 @@
             <span>
               <h5>Estimated Cost</h5>
               <span class="input-field">
-                <input type="text" class="app-input" [disabled]="true">
+                <input type="text"
+                       [value]="this.accounts[selectedIndex]!.userLoan!.incomeDetails!.estimatedCost"
+                       class="app-input" [disabled]="true">
               </span>
             </span>
           </td>
@@ -132,10 +149,25 @@
               <h5>Status</h5>
               <span class="input-field">
                 <select #status (change)="onUpdateStatus(status.value)">
-                  <option [value]="applicationStatus.APPLIED" selected>Applied</option>
-                  <option [value]="applicationStatus.VERIFICATION">Verification</option>
-                  <option [value]="applicationStatus.APPROVED">Approved</option>
-                  <option [value]="applicationStatus.REJECTED">Rejected</option>
+                  <option [value]="applicationStatus.APPLIED"
+                          [selected]="this.accounts[selectedIndex].status == applicationStatus.APPLIED">
+                    Applied
+                  </option>
+                  <option [value]="applicationStatus.VERIFICATION"
+                          [selected]="this.accounts[selectedIndex].status == applicationStatus.VERIFICATION"
+                  >
+                    Verification
+                  </option>
+                  <option [value]="applicationStatus.APPROVED"
+                          [selected]="this.accounts[selectedIndex].status == applicationStatus.APPROVED"
+                  >
+                    Approved
+                  </option>
+                  <option [value]="applicationStatus.REJECTED"
+                          [selected]="this.accounts[selectedIndex].status == applicationStatus.REJECTED"
+                  >
+                    Rejected
+                  </option>
                 </select>
               </span>
             </span>
@@ -153,37 +185,49 @@
         <span>
           <h3>First Name</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text" class="app-input"
+                   [value]="this.accounts[selectedIndex]!.userTable!.firstName"
+            >
           </span>
         </span>
         <span>
           <h3>Middle Name</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text" class="app-input"
+                   [value]="this.accounts[selectedIndex]!.userTable!.middleName"
+            >
           </span>
         </span>
         <span>
           <h3>Last Name</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text" class="app-input"
+                   [value]="this.accounts[selectedIndex]!.userTable!.lastName"
+            >
           </span>
         </span>
         <span>
         <h3>Email ID</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userTable!.emailId"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Phone Number</h3>
           <span class="input-field">
-            <input type="number" class="app-input" >
+            <input type="number"
+                   [value]="this.accounts[selectedIndex]!.userTable!.phNumber"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>DOB</h3>
           <span class="input-field">
-            <input type="date" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userTable!.dob!.split('T')[0]"
+                   class="app-input" >
           </span>
         </span>
         <span>
@@ -206,19 +250,25 @@
         <span>
           <h3>Nationality</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userTable!.nationality"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Aadhar No</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userTable!.adharNo"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>PAN ID</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userTable!.panId"
+                   class="app-input" >
           </span>
         </span>
       </fieldset>
@@ -230,43 +280,61 @@
         <span>
           <h3>Employment Type</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+
+                   [value]="this.accounts[selectedIndex]!.userLoan!.incomeDetails!.employmentType"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Retirement Age</h3>
           <span class="input-field" >
-            <input type="number" class="app-input" >
+            <input type="number"
+                   [value]="this.accounts[selectedIndex]!.userLoan!.incomeDetails!.retire"
+
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Organization</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userLoan!.incomeDetails!.employerName"
+
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Employer</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userLoan!.incomeDetails!.employerName"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Property Location</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userLoan!.incomeDetails!.propertyLocation"
+
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Property Name</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userLoan!.incomeDetails!.propertyName"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Estimated Cost</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userLoan!.incomeDetails!.estimatedCost"
+                   class="app-input" >
           </span>
         </span>
       </fieldset>
@@ -278,13 +346,17 @@
         <span>
           <h3>Tenure</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="this.accounts[selectedIndex]!.userLoan!.loanDetails!.tenure"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Loan Amount</h3>
           <span class="input-field">
-            <input type="number" class="app-input" >
+            <input type="number"
+                   [value]="this.accounts[selectedIndex]!.userLoan!.loanDetails!.loanAmount"
+                   class="app-input" >
           </span>
         </span>
       </fieldset>

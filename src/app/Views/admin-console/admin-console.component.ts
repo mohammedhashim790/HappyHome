@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FloatingWidgetComponent} from "../Widgets/floating-widget/floating-widget.component";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {ApplicationStatus} from "../application-status/application-status.component";
+import {UserAccountService} from "../../Bloc/Services/UserAccount/user-account.service";
+import {UserAccountTable} from "../../Bloc/Interfaces/Interfaces";
 
 @Component({
   selector: 'app-admin-console',
@@ -15,23 +17,32 @@ export class AdminConsoleComponent implements OnInit {
 
   applicationStatus = ApplicationStatus;
 
-  applications:Array<any> = [];
+  // applications:Array<any> = [];
 
   viewableDocParams = {
     title:'',
     image:false,
     src:''
   }
-
   viewableDoc: SafeUrl;
 
-  constructor(public sanitizer:DomSanitizer) {
-    this.applications = new Array(100).fill(0).map(((value, index) => index+1));
-    console.log(this.applications);
+  accounts:Array<UserAccountTable> = [];
+  selectedIndex:number = -1;
+
+  constructor(public sanitizer:DomSanitizer,private userAccountService:UserAccountService) {
+    // this.applications = new Array(100).fill(0).map(((value, index) => index+1));
+    // console.log(this.applications);
     this.viewableDoc = this.sanitizer.bypassSecurityTrustResourceUrl('assets/documents/payslip.pdf');
   }
 
   ngOnInit(): void {
+    this.userAccountService.ListUserAccount().subscribe((res)=>{
+      this.accounts = res;
+      console.log("Accounts");
+      if(this.accounts.length>0)
+        this.selectedIndex = 0;
+      console.log(this.accounts);
+    })
   }
 
   ViewDoc(title:string,image:boolean,src: string) {
@@ -53,9 +64,36 @@ export class AdminConsoleComponent implements OnInit {
     console.log(value);
     if(value == this.applicationStatus.APPROVED){
       this.approveDialog.Show();
+
       return;
     }
+    let element = this.accounts[this.selectedIndex];
+    element.status = value;
     // TODO
-    // UPDATE THE DATABASE
+    this.userAccountService.UpdateAccount(element.id as number,element).subscribe((res)=>{
+      console.log(res);
+    },error => {
+      console.error(error);
+    });
+  }
+
+  getValue(key:string){
+    if(this.selectedIndex == -1)
+      return '';
+    return '';
+    // return this.accounts[this.selectedIndex][key];
+  }
+
+  OnUpdateApprove(value:string) {
+    let element = this.accounts[this.selectedIndex];
+    element.status = ApplicationStatus.APPROVED;
+    element.signature = value
+    // TODO
+    this.userAccountService.UpdateAccount(element.id as number,element).subscribe((res)=>{
+      console.log(res);
+      this.approveDialog.Hide();
+    },error => {
+      console.error(error);
+    });
   }
 }

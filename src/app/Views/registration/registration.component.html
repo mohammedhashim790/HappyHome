@@ -17,14 +17,14 @@
         <span class="app-input">
           <h2>Personal Details</h2>
         </span>
-        <form class="input-fields" formGroupName="personal">
+        <form class="input-fields" formGroupName="userTable">
           <span>
             <h3>First Name</h3>
             <span class="input-field">
               <input type="text" class="app-input" formControlName="firstName">
 
               <small class="error"
-                     *ngIf="controlValid(personalForm,'firstName')">Field is invalid</small>
+                     *ngIf="controlValid(userTableForm,'firstName')">Field is invalid</small>
             </span>
           </span>
           <span>
@@ -38,7 +38,7 @@
             <span class="input-field">
               <input type="text" class="app-input" formControlName="lastName">
               <small class="error"
-                     *ngIf="controlValid(personalForm,'lastName')">Field is invalid</small>
+                     *ngIf="controlValid(userTableForm,'lastName')">Field is invalid</small>
             </span>
           </span>
           <span>
@@ -46,7 +46,7 @@
             <span class="input-field">
               <input type="text" class="app-input" formControlName="emailId">
               <small class="error"
-                     *ngIf="controlValid(personalForm,'emailId')">Field is invalid</small>
+                     *ngIf="controlValid(userTableForm,'emailId')">Field is invalid</small>
             </span>
           </span>
           <span>
@@ -54,15 +54,15 @@
             <span class="input-field">
               <input type="number" class="app-input" formControlName="phNumber">
               <small class="error"
-                     *ngIf="controlValid(personalForm,'phNumber')">Field is invalid</small>
+                     *ngIf="controlValid(userTableForm,'phNumber')">Field is invalid</small>
             </span>
           </span>
           <span>
             <h3>DOB</h3>
             <span class="input-field">
-              <input type="date" class="app-input" formControlName="DOB">
+              <input type="date" class="app-input" formControlName="dob">
               <small class="error"
-                     *ngIf="controlValid(personalForm,'DOB')">Field is invalid</small>
+                     *ngIf="controlValid(userTableForm,'DOB')">Field is invalid</small>
             </span>
           </span>
           <span>
@@ -70,17 +70,17 @@
             <span class="input-radio-group">
               <span>
                 <input id="male" value="male" type="radio" name="gender" formControlName="gender"
-                       [checked]="personalForm.get('gender')?.value == 'male'">
+                       [checked]="userTableForm.get('gender')?.value == 'male'">
                 <label style="width: 100%" for="male">Male</label>
               </span>
               <span>
                 <input id="female" value="female" type="radio" name="gender" formControlName="gender"
-                       [checked]="personalForm.get('gender')?.value == 'female'">
+                       [checked]="userTableForm.get('gender')?.value == 'female'">
                 <label style="width: 100%" for="female">Female</label>
               </span>
               <span>
                 <input id="not-specify" value="unspecified" type="radio" name="gender" formControlName="gender"
-                       [checked]="personalForm.get('gender')?.value == 'unspecified'">
+                       [checked]="userTableForm.get('gender')?.value == 'unspecified'">
                 <label style="width: 100%" for="not-specify">Rather Not Specify</label>
               </span>
             </span>
@@ -90,15 +90,15 @@
             <span class="input-field">
               <input type="text" class="app-input" formControlName="nationality">
               <small class="error"
-                     *ngIf="controlValid(personalForm,'nationality')">Field is invalid</small>
+                     *ngIf="controlValid(userTableForm,'nationality')">Field is invalid</small>
             </span>
             </span>
           <span>
             <h3>Aadhar No</h3>
             <span class="input-field">
-              <input type="text" class="app-input" formControlName="aadharNo">
+              <input type="text" class="app-input" formControlName="adharNo">
               <small class="error"
-                     *ngIf="controlValid(personalForm,'aadharNo')">Field is invalid</small>
+                     *ngIf="controlValid(userTableForm,'aadharNo')">Field is invalid</small>
             </span>
           </span>
           <span>
@@ -106,15 +106,15 @@
             <span class="input-field">
               <input type="text" class="app-input" formControlName="panId">
               <small class="error"
-                     *ngIf="controlValid(personalForm,'panId')">Field is invalid</small>
+                     *ngIf="controlValid(userTableForm,'panId')">Field is invalid</small>
             </span>
           </span>
         </form>
         <span>
           <button class="primary-button next"
                   (click)="ProceedToNext()"
-                  [disabled]="personalForm.invalid"
-                  [class.disabled-option]="personalForm.invalid">Next-></button>
+                  [disabled]="userTableForm.invalid"
+                  [class.disabled-option]="userTableForm.invalid">Next-></button>
         </span>
       </div>
 
@@ -155,6 +155,17 @@
                      *ngIf="controlValid(incomeForm,'employerName')">Field is invalid</small>
             </span>
           </span>
+
+          <span>
+            <h3>Current Salary</h3>
+            <span class="input-field">
+              <input type="number" class="app-input" formControlName="current_Sallary">
+              <small class="error"
+                     *ngIf="controlValid(incomeForm,'current_Sallary')">Field is invalid</small>
+            </span>
+          </span>
+
+
           <span>
             <h3>Property Location</h3>
             <span class="input-field">
@@ -174,7 +185,7 @@
           <span>
             <h3>Estimated Cost</h3>
             <span class="input-field">
-              <input type="text" class="app-input" formControlName="estimatedCost">
+              <input type="number" class="app-input" formControlName="estimatedCost">
               <small class="error"
                      *ngIf="controlValid(incomeForm,'estimatedCost')">Field is invalid</small>
             </span>
@@ -278,7 +289,7 @@
             <ion-icon name="create"></ion-icon>
           </h2>
         </span>
-        <form class="input-fields" formGroupName="personal">
+        <form class="input-fields" formGroupName="userTable">
           <span>
             <h3>First Name</h3>
             <span class="input-field">
@@ -312,7 +323,7 @@
           <span>
             <h3>DOB</h3>
             <span class="input-field">
-              <input type="date" class="app-input" formControlName="DOB">
+              <input type="date" class="app-input" formControlName="dob">
             </span>
           </span>
           <span>
@@ -320,17 +331,17 @@
             <span class="input-radio-group">
               <span>
                 <input id="male" value="male" type="radio" name="gender" formControlName="gender"
-                       [checked]="personalForm.get('gender')?.value == 'male'">
+                       [checked]="userTableForm.get('gender')?.value == 'male'">
                 <label style="width: 100%" for="male">Male</label>
               </span>
               <span>
                 <input id="female" value="female" type="radio" name="gender" formControlName="gender"
-                       [checked]="personalForm.get('gender')?.value == 'female'">
+                       [checked]="userTableForm.get('gender')?.value == 'female'">
                 <label style="width: 100%" for="female">Female</label>
               </span>
               <span>
                 <input id="not-specify" value="unspecified" type="radio" name="gender" formControlName="gender"
-                       [checked]="personalForm.get('gender')?.value == 'unspecified'">
+                       [checked]="userTableForm.get('gender')?.value == 'unspecified'">
                 <label style="width: 100%" for="not-specify">Rather Not Specify</label>
               </span>
             </span>
@@ -344,7 +355,7 @@
           <span>
             <h3>Aadhar No</h3>
             <span class="input-field">
-              <input type="text" class="app-input" formControlName="aadharNo">
+              <input type="text" class="app-input" formControlName="adharNo">
             </span>
           </span>
           <span>

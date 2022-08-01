@@ -7,6 +7,7 @@ import {RegistrationComponent} from "./Views/registration/registration.component
 import {ApplicationStatusComponent} from "./Views/application-status/application-status.component";
 import {AdminConsoleComponent} from "./Views/admin-console/admin-console.component";
 import {AdminGuard} from "./Guards/AdminGuard/admin.guard";
+import {SignInGuard} from "./Guards/SignInGuard/sign-in.guard";
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
   },
   {
     path:'registration',
+    canActivate:[SignInGuard],
     component:RegistrationComponent,
   },
   {

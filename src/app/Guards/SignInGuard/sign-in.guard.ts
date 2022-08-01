@@ -6,20 +6,20 @@ import {UserParams} from "../../Bloc/UserParams";
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class SignInGuard implements CanActivate {
 
   constructor(private router:Router) {
   }
 
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    if(!(UserParams.UserParams!=undefined && UserParams.UserParams.is_Admin == true)){
-      this.router.navigateByUrl('');
+    if(UserParams.UserParams==undefined){
+      this.router.navigateByUrl('sign-in');
     }
 
-    return UserParams.UserParams!=undefined && UserParams.UserParams.is_Admin == true;
+    return UserParams.UserParams!=undefined;
   }
 
 }

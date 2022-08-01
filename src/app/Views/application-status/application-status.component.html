@@ -19,9 +19,8 @@
       <h4 class="waiting-for-approval">Verification in progress</h4>
     </span>
   </div>
-  <div class="content-container">
-    <fieldset class="content" style="min-height: 160vh">
-
+  <div *ngIf="application!=null" class="content-container">
+    <fieldset class="content" style="min-height: 160vh" [disabled]="true">
       <span class="app-input">
         <h2>Account Details</h2>
       </span>
@@ -29,7 +28,7 @@
         <span>
           <h3>Account Number</h3>
           <span class="input-field">
-            <input type="text" class="app-input">
+            <input type="text" class="app-input" [value]="application.account_ID">
           </span>
         </span>
       </form>
@@ -41,52 +40,75 @@
         <span>
           <h3>First Name</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userTable!.firstName"
+                   class="app-input" >
           </span>
         </span>
         <span>
           <h3>Middle Name</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userTable!.middleName"
+                   class="app-input" >
           </span>
         </span>
         <span>
           <h3>Last Name</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userTable!.lastName"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Email ID</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userTable!.emailId"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Phone Number</h3>
           <span class="input-field">
-            <input type="number" class="app-input" >
+            <input type="number"
+                   [value]="application!.userTable!.phNumber"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>DOB</h3>
           <span class="input-field">
-            <input type="date" class="app-input" >
+            <input type="date"
+                   [value]="application!.userTable!.dob!.split('T')[0]"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Gender</h3>
           <span class="input-radio-group">
             <span>
-              <input id="male" value="male" type="radio" name="gender" >
+              <input id="male" value="male"
+                     type="radio"
+                     name="gender"
+                     [checked]="application!.userTable!.gender == 'male'">
               <label style="width: 100%" for="male">Male</label>
             </span>
             <span>
-              <input id="female" value="female" type="radio" name="gender" >
+              <input id="female" value="female"
+                     type="radio"
+                     name="gender"
+                     [checked]="application!.userTable!.gender == 'female'"
+              >
               <label style="width: 100%" for="female">Female</label>
             </span>
             <span>
-              <input id="not-specify" value="unspecified" type="radio" name="gender" >
+              <input id="not-specify"
+                     value="unspecified"
+                     type="radio"
+                     [checked]="application!.userTable!.gender == 'unspecified'"
+                     name="gender" >
               <label style="width: 100%" for="not-specify">Rather Not Specify</label>
             </span>
           </span>
@@ -94,19 +116,25 @@
         <span>
           <h3>Nationality</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userTable!.nationality"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Aadhar No</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userTable!.adharNo"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>PAN ID</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userTable!.panId"
+                   class="app-input" >
           </span>
         </span>
       </form>
@@ -118,43 +146,61 @@
         <span>
           <h3>Employment Type</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userLoan!.incomeDetails!.employmentType"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Retirement Age</h3>
           <span class="input-field" >
-            <input type="number" class="app-input" >
+            <input type="number"
+                   [value]="application!.userLoan!.incomeDetails!.retire"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Organization</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userLoan!.incomeDetails!.employerName"
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Employer</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userLoan!.incomeDetails!.employerName"
+
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Property Location</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userLoan!.incomeDetails!.propertyLocation"
+
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Property Name</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userLoan!.incomeDetails!.propertyName"
+
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Estimated Cost</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userLoan!.incomeDetails!.estimatedCost"
+
+                   class="app-input" >
           </span>
         </span>
       </form>
@@ -166,16 +212,22 @@
         <span>
           <h3>Tenure</h3>
           <span class="input-field">
-            <input type="text" class="app-input" >
+            <input type="text"
+                   [value]="application!.userLoan!.loanDetails!.tenure"
+
+                   class="app-input" >
           </span>
         </span>
         <span>
         <h3>Loan Amount</h3>
           <span class="input-field">
-            <input type="number" class="app-input" >
+            <input type="number"
+                   [value]="application!.userLoan!.loanDetails!.loanAmount"
+
+                   class="app-input" >
           </span>
         </span>
       </form>
     </fieldset>
-  </div>
+  </div >
 </section>
