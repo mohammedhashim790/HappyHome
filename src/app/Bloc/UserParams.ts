@@ -4,6 +4,10 @@ import {UserTable} from "./Interfaces/Interfaces";
 
 export class UserParams{
 
+  /**
+   * UserTable Reference to Store User Details
+   * @private
+   */
   private static userParams:UserTable | null;
 
   static get UserParams():UserTable | null{
@@ -15,6 +19,10 @@ export class UserParams{
 
   }
 
+  /**
+   * LogOut UserParams
+   * @constructor
+   */
   static LogOut(){
     this.userParams = null;
   }

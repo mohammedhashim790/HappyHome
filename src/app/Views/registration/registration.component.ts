@@ -96,20 +96,30 @@ export class RegistrationComponent implements OnInit {
 
   details:FormGroup;
 
-
-
+  /**
+   * UserForm
+   */
   get userTableForm(){
     return this.details.controls["userTable"];
   }
 
+  /**
+   * Income Form
+   */
   get incomeForm(){
     return this.details.controls["income"];
   }
 
+  /**
+   * LoanForm
+   */
   get loanForm(){
     return this.details.controls["loan"];
   }
 
+  /**
+   * Document Form
+   */
   get documentsForm(){
     return this.details.controls["documents"];
   }
@@ -165,11 +175,20 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Change Widget State
+   * @param state
+   * @constructor
+   */
   MoveTo(state:ApplicationState){
     if(state<this.currentApplicationState)
       this.currentApplicationState = state;
   }
 
+  /**
+   * Proceed to Next
+   * @constructor
+   */
   ProceedToNext() {
     if(this.currentApplicationState<4) {
       this.currentApplicationState++;
@@ -180,6 +199,10 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  /**
+   * Evaluate Results and Creates a new Account by Validating Fields and then Invoking CreateNewAccount
+   * @constructor
+   */
   Register() {
 
     let query = this.InitializeData();

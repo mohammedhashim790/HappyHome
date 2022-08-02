@@ -10,6 +10,9 @@ import {Router} from "@angular/router";
 })
 export class Loandetail2Component implements OnInit {
 
+  /**
+   * Get Application Details from Parent Component
+   */
   @Input() applicationDetails:FormGroup | undefined;
 
   constructor(private router:Router) {

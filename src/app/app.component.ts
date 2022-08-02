@@ -20,6 +20,10 @@ export class AppComponent {
     this.router.navigateByUrl(path);
   }
 
+  /**
+   * Global Signout
+   * @constructor
+   */
   OnSignOut() {
     UserParams.LogOut();
     this.router.navigateByUrl('');

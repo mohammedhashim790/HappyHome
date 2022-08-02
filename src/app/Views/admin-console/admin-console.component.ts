@@ -24,21 +24,29 @@ export enum WidgetState{
 })
 export class AdminConsoleComponent implements OnInit {
 
+  // Alert Dialog for Viewing Documents
   @ViewChild("viewDoc") alertDialog:FloatingWidgetComponent | any;
+  // Alert Dialog To Confirm Approval of Loan
   @ViewChild("ConfirmUpdate") approveDialog:FloatingWidgetComponent | any;
 
+  //Application Status Reference
   applicationStatus = ApplicationStatus;
 
+  // Angular Web Page state for easy transitioning
   state = WidgetState.LOADING;
 
+  // Web Page State Reference
   WidgetState = WidgetState;
 
 
+  //Alert Dialog Display Params
   viewableDocParams:ViewableDocParams = {
     title:'',
     image:false
   };
+
   viewableDoc: SafeUrl;
+
 
   accounts:Array<UserAccountTable> = [];
   selectedIndex:number = -1;
@@ -51,6 +59,15 @@ export class AdminConsoleComponent implements OnInit {
     this.readData('*');
   }
 
+  /**
+   * @param title
+   * @param image
+   * @param src
+   * @return
+   * @constructor
+   *
+   * ViewDoc assigns the params to 'viewableDocParams'
+   */
   ViewDoc(title:string,image:boolean,src: string) {
 
     this.viewableDocParams = {
@@ -62,10 +79,18 @@ export class AdminConsoleComponent implements OnInit {
     this.alertDialog.Show();
   }
 
+  /**
+   * @param src
+   * Sanitizes DOM Elements from Local Storage Assets
+   */
   sanitize(src:string){
     return this.sanitizer.bypassSecurityTrustResourceUrl(src)
   }
 
+  /**
+   *
+   * @param value
+   */
   onUpdateStatus(value: string) {
     console.log(value);
     if(value == this.applicationStatus.APPROVED){
@@ -90,6 +115,13 @@ export class AdminConsoleComponent implements OnInit {
     // return this.accounts[this.selectedIndex][key];
   }
 
+  /**
+   *
+   * @param value
+   * @constructor
+   * Updates Status and Reflects the changes to the user.
+   */
+
   OnUpdateApprove(value:string) {
     let element = this.accounts[this.selectedIndex];
     element.status = ApplicationStatus.APPROVED;
@@ -103,6 +135,12 @@ export class AdminConsoleComponent implements OnInit {
     });
   }
 
+  /**
+   * @param value
+   * @constructor
+   *
+   * ApplyFilter filters value and Accounts Based on Status
+   */
   ApplyFilter(value:string){
     console.log(value);
     if(value == "*"){

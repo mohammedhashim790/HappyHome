@@ -12,7 +12,11 @@ import {UserService} from "../../Bloc/Services/User/user.service";
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
- details:FormGroup;
+
+  /**
+   * FormGroup which collects User Details
+   */
+  details:FormGroup;
   formSubmitted: boolean = false;
   constructor(private router:Router,private userService:UserService) {
     this.details=new FormBuilder().group({
@@ -24,12 +28,21 @@ export class SignUpComponent implements OnInit {
     );
   }
 
+  /**
+   * Validate Field
+   * @param key
+   */
   isValid(key:string){
     return (this.details.controls[key].errors && (this.details.controls[key].touched || this.details.controls[key].dirty))
   }
 
   ngOnInit(): void {
   }
+
+  /**
+   * Validates Field and Creates a new User
+   * @constructor
+   */
   OnSignUp(){
     this.formSubmitted = true;
     let name = this.details.get('fullName')?.value.split(" ");

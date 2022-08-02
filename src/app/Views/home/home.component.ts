@@ -48,6 +48,13 @@ export class HomeComponent implements OnInit {
     },2500);
   }
 
+  /**
+   * Calculates EMI
+   *
+   * @Formula
+   *  loan * roi * (1+roi) ** year / (1+roi)**(year-1)
+   * @constructor
+   */
   CalculateEMI() {
     console.log(this.emiForm.valid);
     if(!this.emiForm.valid)
@@ -61,6 +68,14 @@ export class HomeComponent implements OnInit {
     this.emiForm.controls['emi'].setValue(emi);
   }
 
+
+  /**
+   * Calculates Eligibility
+   *
+   * @Formula
+   *  60 * 60% * loan / 100
+   * @constructor
+   */
   CalculateEligibility() {
     console.log(this.eligibilityForm.valid);
     if(!this.eligibilityForm.valid)
@@ -150,8 +165,11 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /**
+   * Finds Loan Account by Account Number
+   * @constructor
+   */
   FindLoan() {
-
     this.accountService.GetAccountByAccountId(this.trackerId.value).subscribe((res)=>{
       this.router.navigate(['status'],{queryParams:{id:res.id}});
     },error => {

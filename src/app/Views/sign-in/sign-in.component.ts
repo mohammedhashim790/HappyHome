@@ -11,6 +11,10 @@ import {UserParams} from "../../Bloc/UserParams";
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+
+  /**
+   * FormGroup Params for Collecting User Details
+   */
   details:FormGroup;
   passwordHidden: boolean = true;
 
@@ -24,6 +28,11 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  /**
+   * Validates User Details
+   * @constructor
+   */
   OnLogIn(){
     console.log("logging in")
     console.log(this.details.value);

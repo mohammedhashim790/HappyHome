@@ -28,10 +28,19 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
+  /**
+   * Lists All Confirmed Users
+   * @constructor
+   */
   ListUsers(){
     return this.http.get<UserTable>(this.url,this.httpOptions).pipe();
   }
 
+  /**
+   * Get User Info By USER ID
+   * @param id
+   * @constructor
+   */
   GetUserById(id:number){
     return this.http.get<UserTable>(this.url,{
       params:{
@@ -41,14 +50,29 @@ export class UserService {
     }).pipe();
   }
 
+  /**
+   * Update User Details BY ID
+   * @param user
+   * @constructor
+   */
   UpdateUser(user:UserTable){
     return this.http.post<UserTable>(this.url,user,this.httpOptions).pipe()
   }
 
+  /**
+   * Create a New User
+   * @param user
+   * @constructor
+   */
   CreateUser(user:UserTable) {
     return this.http.post<UserTable>(this.url + 'AddUser',user,this.httpOptions).pipe();
   }
 
+  /**
+   * Authenticates the user and returns a token
+   * @param user
+   * @constructor
+   */
   AuthenticateUser(user:UserTable){
     return this.http.post<UserTable>(this.url + 'authenticate',user,this.httpOptions);
   }
