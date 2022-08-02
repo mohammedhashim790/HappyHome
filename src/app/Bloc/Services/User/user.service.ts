@@ -8,8 +8,6 @@ import {UserTable} from "../../Interfaces/Interfaces";
 })
 export class UserService {
 
-
-
   private controllerName:string = "User/"
   private url:string = environment.apiUrl + this.controllerName;
 

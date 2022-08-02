@@ -37,7 +37,7 @@ const routes: Routes = [
   },
   {
     path:'admin',
-    // canActivate:[AdminGuard],
+    canActivate:[AdminGuard],
     component:AdminConsoleComponent
   }
 ];
