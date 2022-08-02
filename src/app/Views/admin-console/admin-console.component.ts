@@ -5,6 +5,18 @@ import {ApplicationStatus} from "../application-status/application-status.compon
 import {UserAccountService} from "../../Bloc/Services/UserAccount/user-account.service";
 import {UserAccountTable} from "../../Bloc/Interfaces/Interfaces";
 
+
+export type ViewableDocParams = {
+  title:string;
+  image:boolean;
+  src?:any;
+}
+
+export enum WidgetState{
+  LOADING,
+  LOADED,
+}
+
 @Component({
   selector: 'app-admin-console',
   templateUrl: './admin-console.component.html',
@@ -17,32 +29,26 @@ export class AdminConsoleComponent implements OnInit {
 
   applicationStatus = ApplicationStatus;
 
-  // applications:Array<any> = [];
+  state = WidgetState.LOADING;
 
-  viewableDocParams = {
+  WidgetState = WidgetState;
+
+
+  viewableDocParams:ViewableDocParams = {
     title:'',
-    image:false,
-    src:''
-  }
+    image:false
+  };
   viewableDoc: SafeUrl;
 
   accounts:Array<UserAccountTable> = [];
   selectedIndex:number = -1;
 
   constructor(public sanitizer:DomSanitizer,private userAccountService:UserAccountService) {
-    // this.applications = new Array(100).fill(0).map(((value, index) => index+1));
-    // console.log(this.applications);
     this.viewableDoc = this.sanitizer.bypassSecurityTrustResourceUrl('assets/documents/payslip.pdf');
   }
 
   ngOnInit(): void {
-    this.userAccountService.ListUserAccount().subscribe((res)=>{
-      this.accounts = res;
-      console.log("Accounts");
-      if(this.accounts.length>0)
-        this.selectedIndex = 0;
-      console.log(this.accounts);
-    })
+    this.readData('*');
   }
 
   ViewDoc(title:string,image:boolean,src: string) {
@@ -50,7 +56,7 @@ export class AdminConsoleComponent implements OnInit {
     this.viewableDocParams = {
       title: title,
       image: image,
-      src:src
+      src:this.sanitizer.bypassSecurityTrustResourceUrl(src)
     }
 
     this.alertDialog.Show();
@@ -95,5 +101,44 @@ export class AdminConsoleComponent implements OnInit {
     },error => {
       console.error(error);
     });
+  }
+
+  ApplyFilter(value:string){
+    console.log(value);
+    if(value == "*"){
+      this.readData("*")
+    }else{
+      this.readData(value);
+    }
+  }
+
+  private readData(filter: string) {
+    this.state = WidgetState.LOADING;
+    if(filter == '*'){
+      this.userAccountService.ListUserAccount().subscribe((res)=>{
+        this.accounts = res;
+        console.log("Accounts");
+        this.selectedIndex = 0;
+        console.log(res);
+        setTimeout(()=>{
+          this.state = WidgetState.LOADED;
+        },2500);
+      });
+    }else{
+      this.userAccountService.ListUserAccountByStatus(filter).subscribe((res)=>{
+        this.accounts = res;
+        console.log("Accounts");
+        this.selectedIndex = 0;
+        console.log(res);
+        setTimeout(()=>{
+          this.state = WidgetState.LOADED;
+        },2500);
+      });
+    }
+
+  }
+
+  reload() {
+    this.readData('*')
   }
 }

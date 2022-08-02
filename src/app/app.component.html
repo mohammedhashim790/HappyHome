@@ -39,14 +39,14 @@
       <ion-icon name="person"></ion-icon>
       <h5>Admin</h5>
     </a>
-    <a *ngIf="UserParams.UserParams == undefined;else signOut" class="right-align" style="margin-left: unset" (click)="navigateTo('sign-in')">
+    <a *ngIf="UserParams.UserParams == undefined;else signOut" class="right-align" style="margin-left: unset;width: 122px;" (click)="navigateTo('sign-in')">
       <ion-icon name="log-in-outline"></ion-icon>
       <h5>Login</h5>
     </a>
     <ng-template #signOut>
-      <a class="right-align" style="margin-left: unset" (click)="OnSignOut()">
+      <a class="right-align" style="margin-left: unset;width: 122px;" (click)="OnSignOut()">
         <ion-icon name="log-out-outline"></ion-icon>
-        <h5>Sign Out</h5>
+        <h5 style="width: 100%">Sign Out</h5>
       </a>
     </ng-template>
   </span>

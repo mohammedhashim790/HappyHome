@@ -141,7 +141,11 @@ export class RegistrationComponent implements OnInit {
       }),
       loan:new FormGroup({
         tenure:new FormControl('',[Validators.required,Validators.pattern("[0-9]{1,}")]),
-        loanAmount:new FormControl('',[Validators.required,Validators.pattern("[0-9]{1,}")])
+        loanAmount:new FormControl('',[Validators.required,Validators.pattern("[0-9]{1,}")]),
+        bank_Name:new FormControl('',[]),
+        account_Number:new FormControl('',[]),
+        address:new FormControl('',[]),
+        ifsc:new FormControl('',[]),
       }),
       documents:new FormGroup({
         panId:new FormControl('',[Validators.required]),
@@ -228,5 +232,7 @@ export class RegistrationComponent implements OnInit {
 
     return req as UserAccountTable;
   }
+
+
 
 }

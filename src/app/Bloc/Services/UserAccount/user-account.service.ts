@@ -53,4 +53,8 @@ export class UserAccountService {
       headers:this.header
     }).pipe();
   }
+
+  ListUserAccountByStatus(filter: string) {
+    return this.http.get<Array<UserAccountTable>>(this.url+ 'GetAllAccByStatus/' + filter,this.httpOptions).pipe();
+  }
 }
